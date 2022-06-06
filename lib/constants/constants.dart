@@ -16,6 +16,11 @@ const TextStyle kUserAuthSubTitle = TextStyle(
   fontSize: 14,
 );
 
+const TextStyle kHeadlineMedium = TextStyle(
+  color: kPrimaryColor,
+  fontSize: 20,
+);
+
 // const TextStyle kHintTextStyle = TextStyle(
 //   color: kHintTextColor,
 //   fontSize: 16,
