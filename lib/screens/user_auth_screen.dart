@@ -76,8 +76,11 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                             shape: BoxShape.circle,
                           ),
                           child: ClipRRect(
-                            child: Image.asset(
-                              'assets/images/auth_screen_logo_background.png',
+                            child: Opacity(
+                              opacity: 0.7,
+                              child: Image.asset(
+                                'assets/images/auth_screen_logo_background.png',
+                              ),
                             ),
                           ),
                         ),
