@@ -4,13 +4,14 @@ List<MovieItem> SAMPLE_MOVIES = [
   MovieItem(
       id: '2333',
       title: 'Doctor Strange : MOM',
-      description: '',
+      description:
+          'Dr Stephen Strange casts a forbidden spell that opens a portal to the multiverse. However, a threat emerges that may be too big for his team to handle.',
       imagePath: 'assets/images/samples/sample_movie2.png',
       ratingInStars: 4,
       genre: 'Action/Adventure',
       director: 'Sam Raimi',
       length: '2hr 6mins',
-      trailerUrl: ''),
+      trailerUrl: 'https://youtu.be/aWzlQ2N6qqg'),
   MovieItem(
       id: '23f3',
       title: 'KFG 2',
@@ -34,7 +35,8 @@ List<MovieItem> SAMPLE_MOVIES = [
   MovieItem(
       id: '232d3',
       title: 'Doctor Strange : MOM',
-      description: '',
+      description:
+          'Dr Stephen Strange casts a forbidden spell that opens a portal to the multiverse. However, a threat emerges that may be too big for his team to handle.',
       imagePath: 'assets/images/samples/sample_movie2.png',
       ratingInStars: 4,
       genre: 'Action/Adventure',

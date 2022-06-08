@@ -34,10 +34,15 @@ class MovieItemWidget extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Hero(
-            tag: 'current-movie-tag',
-            child: Image.asset(
-              movies[currentItemIndex].imagePath,
-              fit: BoxFit.fill,
+            tag: 'current-movie-image-tag${movies[currentItemIndex].id}',
+            transitionOnUserGestures: true,
+            child: Material(
+              type: MaterialType.transparency,
+              color: Colors.transparent,
+              child: Image.asset(
+                movies[currentItemIndex].imagePath,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
         ),

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../providers/movies.dart';
 import '../widgets/movie_item_widget.dart';
 import '../widgets/upcoming_movie.dart';
+import '../utils.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'home-screen/';
@@ -94,17 +95,11 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   const Text('Ratings : ',
                                       style: kHeadlineSmall),
-                                  for (int i = 0,
-                                          j = _movies[movies.getCenterItemIndex]
-                                              .ratingInStars;
-                                      i < 5;
-                                      i++, j--)
-                                    Icon(
-                                      j > 0 ? Icons.star : Icons.star_border,
-                                      color:
-                                          j > 0 ? Colors.yellow : Colors.white,
-                                      size: 20,
-                                    ),
+                                  ...Utils.getRatings(
+                                    _movies[movies.getCenterItemIndex]
+                                        .ratingInStars,
+                                    Colors.white,
+                                  ),
                                 ],
                               ),
                               const SizedBox(height: 8),
