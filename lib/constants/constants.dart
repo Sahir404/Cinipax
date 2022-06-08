@@ -4,6 +4,8 @@ const Color kPrimaryColor = Colors.black;
 const Color kTextFormFieldColor = Colors.black;
 const Color kHintTextColor = Color(0xff4F4F4F);
 const Color kButtonBackgroundColor = Color(0xff363636);
+Color kUpcomingMovieTitleBackgroundColor =
+    const Color(0xffFFFFFF).withOpacity(0.77);
 
 const TextStyle kUserAuthTitle = TextStyle(
   color: Colors.black,

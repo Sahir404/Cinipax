@@ -62,3 +62,46 @@ List<MovieItem> SAMPLE_MOVIES = [
       length: '2hr 26mins',
       trailerUrl: ''),
 ];
+
+List<MovieItem> UPCOMING_MOVIES = [
+  MovieItem(
+      id: 'as33',
+      title: 'Thor: Love And Thunder',
+      description: '',
+      imagePath: 'assets/images/upcoming_movies/sample_upcoming_movie2.png',
+      ratingInStars: 5,
+      genre: 'Action/Adventure/Fiction/Mystery',
+      director: 'Sam Raimi',
+      length: '2hr 12mins',
+      trailerUrl: ''),
+  MovieItem(
+      id: 'er3d3',
+      title: 'Pathan',
+      description: '',
+      imagePath: 'assets/images/upcoming_movies/sample_upcoming_movie1.png',
+      ratingInStars: 4,
+      genre: 'Action/Crime',
+      director: 'Prashanth Neel',
+      length: '1hr 40mins',
+      trailerUrl: ''),
+  MovieItem(
+      id: 'as354',
+      title: 'Thor: Love And Thunder',
+      description: '',
+      imagePath: 'assets/images/upcoming_movies/sample_upcoming_movie2.png',
+      ratingInStars: 5,
+      genre: 'Action/Adventure/Fiction/Mystery',
+      director: 'Sam Raimi',
+      length: '2hr 12mins',
+      trailerUrl: ''),
+  MovieItem(
+      id: 'er3f4d3',
+      title: 'Pathan',
+      description: '',
+      imagePath: 'assets/images/upcoming_movies/sample_upcoming_movie1.png',
+      ratingInStars: 4,
+      genre: 'Action/Crime',
+      director: 'Prashanth Neel',
+      length: '1hr 40mins',
+      trailerUrl: ''),
+];

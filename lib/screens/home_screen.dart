@@ -1,4 +1,5 @@
 import 'package:cinepax_flutter/dummy_data/dummy_data.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import '../constants/constants.dart';
@@ -7,17 +8,21 @@ import '../models/movie_item.dart';
 import 'package:provider/provider.dart';
 import '../providers/movies.dart';
 import '../widgets/movie_item_widget.dart';
+import '../widgets/upcoming_movie.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'home-screen/';
   List<MovieItem> _movies = [];
+  List<MovieItem> _upcomingMovies = [];
 
   HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    _movies = Provider.of<Movies>(context, listen: false).getAllMovies;
+    final moviesProvider = Provider.of<Movies>(context, listen: false);
+    _movies = moviesProvider.getAllMovies;
+    _upcomingMovies = moviesProvider.getUpcomingMovies;
     return Scaffold(
       body: SafeArea(
         // top: false,
@@ -34,13 +39,13 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Image.asset(
                           _movies[movies.getCenterItemIndex].imagePath,
-                          height: size.height * 0.66,
+                          height: size.height * 0.68,
                           width: double.infinity,
-                          fit: BoxFit.fitWidth,
+                          fit: BoxFit.fill,
                         ),
                         BlurryContainer(
                           width: double.infinity,
-                          height: size.height * 0.66,
+                          height: size.height * 0.68,
                           blur: 10,
                           color: Colors.transparent,
                           borderRadius: const BorderRadius.all(Radius.zero),
@@ -50,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Padding(
                                 padding:
-                                    EdgeInsets.only(top: size.height * 0.08),
+                                    EdgeInsets.only(top: size.height * 0.099),
                                 child: CarouselSlider.builder(
                                   itemBuilder: (context, index, realIndex) {
                                     return MovieItemWidget(
@@ -117,7 +122,7 @@ class HomeScreen extends StatelessWidget {
                             turns: const AlwaysStoppedAnimation(-8 / 360),
                             child: Container(
                               width: size.width / 2 + 4,
-                              height: 45,
+                              height: 40,
                               decoration: const BoxDecoration(
                                 // border: Border.all(color: Colors.green, width: 2),
                                 border: Border(
@@ -136,7 +141,7 @@ class HomeScreen extends StatelessWidget {
                             turns: AlwaysStoppedAnimation(8 / 360),
                             child: Container(
                               width: size.width / 2 + 4,
-                              height: 45,
+                              height: 40,
                               decoration: const BoxDecoration(
                                 border: Border(
                                   top: BorderSide(
@@ -153,54 +158,29 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Image.asset(
                   'assets/images/cinepax_logo.png',
-                  width: 130,
-                  height: 80,
-                  fit: BoxFit.cover,
+                  width: 120,
+                  height: 50,
+                  alignment: Alignment.center,
+                  fit: BoxFit.fitWidth,
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 16),
                 const Text(
                   'Upcoming movies',
                   style: kHeadlineMedium,
                 ),
+                const SizedBox(height: 24),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 20),
-                      Container(
-                        width: double.infinity,
-                        height: 120,
-                        decoration: const BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        width: double.infinity,
-                        height: 120,
-                        decoration: const BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        width: double.infinity,
-                        height: 120,
-                        decoration: const BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                    ],
+                  child: SizedBox(
+                    height: size.height * 0.76,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: _upcomingMovies.length,
+                      itemBuilder: (context, index) {
+                        return UpcomingMovie(index: index);
+                      },
+                    ),
                   ),
                 ),
               ],

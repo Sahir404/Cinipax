@@ -1,4 +1,5 @@
 import 'package:cinepax_flutter/screens/home_screen.dart';
+import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/user_auth_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         home: UserAuthScreen(),
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
+          MovieDetailsScreen.routeName: (context) => MovieDetailsScreen(),
         },
       ),
     );
