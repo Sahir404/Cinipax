@@ -11,7 +11,7 @@ List<MovieItem> SAMPLE_MOVIES = [
       genre: 'Action/Adventure',
       director: 'Sam Raimi',
       length: '2hr 6mins',
-      trailerUrl: 'https://youtu.be/aWzlQ2N6qqg'),
+      trailerUrl: 'https://www.youtube.com/watch?v=aWzlQ2N6qqg'),
   MovieItem(
       id: '23f3',
       title: 'KFG 2',
@@ -21,7 +21,7 @@ List<MovieItem> SAMPLE_MOVIES = [
       genre: 'Action/Crime/Drama/History',
       director: 'Prashanth Neel',
       length: '2hr 6mins',
-      trailerUrl: ''),
+      trailerUrl: 'https://www.youtube.com/watch?v=JKa05nyUmuQ'),
   MovieItem(
       id: '2fd33',
       title: 'RRR',
@@ -31,7 +31,7 @@ List<MovieItem> SAMPLE_MOVIES = [
       genre: 'Action/Crime/Drama/History',
       director: 'SS Rajmoli',
       length: '2hr 26mins',
-      trailerUrl: ''),
+      trailerUrl: 'https://www.youtube.com/watch?v=xo1P2sQdhC0'),
   MovieItem(
       id: '232d3',
       title: 'Doctor Strange : MOM',
@@ -42,7 +42,7 @@ List<MovieItem> SAMPLE_MOVIES = [
       genre: 'Action/Adventure',
       director: 'Sam Raimi',
       length: '2hr 6mins',
-      trailerUrl: ''),
+      trailerUrl: 'https://www.youtube.com/watch?v=aWzlQ2N6qqg'),
   MovieItem(
       id: '2ds32d',
       title: 'KFG 2',
@@ -52,7 +52,7 @@ List<MovieItem> SAMPLE_MOVIES = [
       genre: 'Action/Crime/Drama/History',
       director: 'Prashanth Neel',
       length: '2hr 6mins',
-      trailerUrl: ''),
+      trailerUrl: 'https://www.youtube.com/watch?v=JKa05nyUmuQ'),
   MovieItem(
       id: '86g53',
       title: 'RRR',
@@ -62,7 +62,7 @@ List<MovieItem> SAMPLE_MOVIES = [
       genre: 'Action/Crime/Drama/History',
       director: 'SS Rajmoli',
       length: '2hr 26mins',
-      trailerUrl: ''),
+      trailerUrl: 'https://www.youtube.com/watch?v=xo1P2sQdhC0'),
 ];
 
 List<MovieItem> UPCOMING_MOVIES = [

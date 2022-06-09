@@ -1,11 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors
-
 import 'package:cinepax_flutter/models/movie_item.dart';
 import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/movies.dart';
-import '../widgets/movie_item_widget.dart';
 
 class MovieItemWidget extends StatelessWidget {
   late List<MovieItem> movies;
