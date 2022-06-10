@@ -84,6 +84,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
           children: [
             Positioned(
               top: 0,
+              // bottom: 0,
+              left: 0,
+              right: 0,
               child: HeroMode(
                 enabled: _controller.value >= 1.0 ? true : false,
                 child: Hero(
@@ -102,6 +105,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               ),
             ),
             Positioned(
+              // top: size.height * 0.3,
               bottom: 0,
               left: 0,
               right: 0,
@@ -117,141 +121,128 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     topRight: Radius.circular(40),
                   ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: ListView(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Flexible(
-                      child: Text(
-                        _currentMovie.title,
-                        style: kHeadlineMedium.copyWith(
-                          fontSize: 22,
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.bold,
+                    Text(
+                      _currentMovie.title,
+                      style: kHeadlineMedium.copyWith(
+                        fontSize: 22,
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Text(
+                          'Ratings : ',
+                          style: kHeadlineSmall.copyWith(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Flexible(
-                      child: Row(
-                        children: [
-                          Text(
-                            'Ratings : ',
-                            style: kHeadlineSmall.copyWith(
-                              color: kPrimaryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          ...Utils.getRatings(
-                            _currentMovie.ratingInStars,
-                            Colors.black,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Flexible(
-                      child: Text(
-                        'Genre : ${_currentMovie.genre}',
-                        style: kHeadlineSmall.copyWith(
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.bold,
+                        ...Utils.getRatings(
+                          _currentMovie.ratingInStars,
+                          Colors.black,
                         ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Genre : ${_currentMovie.genre}',
+                      style: kHeadlineSmall.copyWith(
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 12),
-                    Flexible(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Director : ',
-                                style: kHeadlineSmall.copyWith(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                _currentMovie.director,
-                                style: kHeadlineSmall.copyWith(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.access_time_outlined,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Director : ',
+                              style: kHeadlineSmall.copyWith(
                                 color: kPrimaryColor,
-                                size: 22,
+                                fontWeight: FontWeight.bold,
                               ),
-                              const SizedBox(width: 4),
-                              Text(
-                                _currentMovie.length,
-                                style: kHeadlineSmall.copyWith(
-                                  fontSize: 13,
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            ),
+                            Text(
+                              _currentMovie.director,
+                              style: kHeadlineSmall.copyWith(
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold,
                               ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.access_time_outlined,
+                              color: kPrimaryColor,
+                              size: 22,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              _currentMovie.length,
+                              style: kHeadlineSmall.copyWith(
+                                fontSize: 13,
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      _currentMovie.description,
+                      softWrap: true,
+                      style: kHeadlineSmall.copyWith(
+                        color: kPrimaryColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 24),
-                    Flexible(
-                      child: Text(
-                        _currentMovie.description,
-                        softWrap: true,
-                        style: kHeadlineSmall.copyWith(
-                          color: kPrimaryColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Flexible(
-                      child: Text(
-                        'Trailer',
-                        style: kHeadlineMedium.copyWith(
-                          fontSize: 22,
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      'Trailer',
+                      style: kHeadlineMedium.copyWith(
+                        fontSize: 22,
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 12),
                     if (_isInitialized)
-                      Expanded(
-                        flex: 5,
-                        child: YoutubePlayerBuilder(
-                          player: YoutubePlayer(
-                            controller: _youtubePlayerController,
-                            showVideoProgressIndicator: true,
-                            bottomActions: [],
-                          ),
-                          onEnterFullScreen: null,
-                          builder: (context, player) {
-                            return Column(
-                              children: [
-                                SizedBox(
-                                    width: double.infinity,
-                                    // height: 260,
-                                    child: player),
-                              ],
-                            );
-                          },
+                      YoutubePlayerBuilder(
+                        player: YoutubePlayer(
+                          controller: _youtubePlayerController,
+                          showVideoProgressIndicator: true,
+                          bottomActions: [],
                         ),
+                        onEnterFullScreen: null,
+                        builder: (context, player) {
+                          return Column(
+                            children: [
+                              SizedBox(
+                                  width: double.infinity,
+                                  // height: 260,
+                                  child: player),
+                            ],
+                          );
+                        },
                       ),
+                    SizedBox(height: 200),
+                    // SizedBox(height: 200),
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
