@@ -6,6 +6,7 @@ const Color kHintTextColor = Color(0xff4F4F4F);
 const Color kButtonBackgroundColor = Color(0xff363636);
 Color kUpcomingMovieTitleBackgroundColor =
     const Color(0xffFFFFFF).withOpacity(0.77);
+Color kDayCardBackground = const Color(0xff2F2F2F);
 
 const TextStyle kUserAuthTitle = TextStyle(
   color: Colors.black,

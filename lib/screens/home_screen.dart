@@ -85,27 +85,48 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 30),
-                              Text(
-                                _movies[movies.getCenterItemIndex].title,
-                                style: kHeadlineLarge,
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text('Ratings : ',
-                                      style: kHeadlineSmall),
-                                  ...Utils.getRatings(
-                                    _movies[movies.getCenterItemIndex]
-                                        .ratingInStars,
-                                    Colors.white,
+                              Hero(
+                                tag:
+                                    'title-tag-${_movies[movies.getCenterItemIndex].id}',
+                                child: Material(
+                                  type: MaterialType.transparency,
+                                  child: Text(
+                                    _movies[movies.getCenterItemIndex].title,
+                                    style: kHeadlineLarge,
                                   ),
-                                ],
+                                ),
                               ),
                               const SizedBox(height: 8),
-                              Text(
-                                'Genre : ${_movies[movies.getCenterItemIndex].genre}',
-                                style: kHeadlineSmall,
+                              Hero(
+                                tag:
+                                    'ratings-tag-${_movies[movies.getCenterItemIndex].id}',
+                                child: Material(
+                                  type: MaterialType.transparency,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Text('Ratings : ',
+                                          style: kHeadlineSmall),
+                                      ...Utils.getRatings(
+                                        _movies[movies.getCenterItemIndex]
+                                            .ratingInStars,
+                                        Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Hero(
+                                tag:
+                                    'genre-tag-${_movies[movies.getCenterItemIndex].id}',
+                                child: Material(
+                                  type: MaterialType.transparency,
+                                  child: Text(
+                                    'Genre : ${_movies[movies.getCenterItemIndex].genre}',
+                                    style: kHeadlineSmall,
+                                  ),
+                                ),
                               ),
                             ],
                           ),

@@ -1,4 +1,7 @@
 import 'package:cinepax_flutter/constants/constants.dart';
+import 'package:cinepax_flutter/screens/show_booking_screen.dart';
+import 'package:cinepax_flutter/screens/show_desc_screen.dart';
+import 'package:cinepax_flutter/widgets/show_dual_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -22,40 +25,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
   late AnimationController _controller;
   late YoutubePlayerController _youtubePlayerController;
   var _isInitialized = true;
+  var _showBookingPage = false;
 
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    Future.delayed(Duration.zero);
-    _currentMovie = Provider.of<Movies>(context, listen: false).getCenterItem;
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    _controller.forward(from: 0.5);
-    _controller.addListener(() {
-      setState(() {});
-    });
-    try {
-      _youtubePlayerController = YoutubePlayerController(
-          initialVideoId:
-              YoutubePlayer.convertUrlToId(_currentMovie.trailerUrl)!,
-          flags: const YoutubePlayerFlags(
-            autoPlay: false,
-            controlsVisibleAtStart: true,
-            showLiveFullscreenButton: false,
-            isLive: false,
-          ));
-      // ..addListener(() {
-      //   if (mounted) {
-      //     setState(() {});
-      //   }
-      // });
-    } catch (exception) {
-      print(exception.toString());
-      _isInitialized = false;
-    }
+    _initAnimController();
+    _initYoutubeController();
   }
 
   @override
@@ -76,8 +52,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     final size = MediaQuery.of(context).size;
     print('build called');
     return Scaffold(
-      extendBody: true,
-      extendBodyBehindAppBar: true,
       backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Stack(
@@ -98,7 +72,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     child: Image.asset(
                       _currentMovie.imagePath,
                       height: size.height * 0.7,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                 ),
@@ -111,9 +85,10 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               right: 0,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                height: _controller.value * size.height * 0.67,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 26),
+                height: _showBookingPage
+                    ? _controller.value * size.height * 0.67 +
+                        size.height * 0.18
+                    : _controller.value * size.height * 0.67,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -122,123 +97,36 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                   ),
                 ),
                 child: ListView(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  physics: const BouncingScrollPhysics(),
                   children: [
-                    Text(
-                      _currentMovie.title,
-                      style: kHeadlineMedium.copyWith(
-                        fontSize: 22,
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.bold,
+                    if (!_showBookingPage)
+                      ShowDescScreen(
+                        currentMovie: _currentMovie,
+                        isInitialized: _isInitialized,
+                        youtubePlayerController: _youtubePlayerController,
                       ),
+                    ShowDualButtons(
+                      size: size,
+                      topBtnText: 'Description',
+                      bottomBtnText: 'Booking',
+                      showTopButton: _showBookingPage,
+                      showBottomPageCallBack: () {
+                        setState(() {
+                          _showBookingPage = true;
+                        });
+                      },
+                      showTopPageCallBack: () {
+                        setState(() {
+                          _showBookingPage = false;
+                        });
+                      },
+                      horizontalPadding: 30,
+                      horizontalMargin: size.width * 0.09,
                     ),
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Text(
-                          'Ratings : ',
-                          style: kHeadlineSmall.copyWith(
-                            color: kPrimaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        ...Utils.getRatings(
-                          _currentMovie.ratingInStars,
-                          Colors.black,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      'Genre : ${_currentMovie.genre}',
-                      style: kHeadlineSmall.copyWith(
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.bold,
+                    if (_showBookingPage)
+                      ShowBookingScreen(
+                        size: size,
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Director : ',
-                              style: kHeadlineSmall.copyWith(
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              _currentMovie.director,
-                              style: kHeadlineSmall.copyWith(
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.access_time_outlined,
-                              color: kPrimaryColor,
-                              size: 22,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              _currentMovie.length,
-                              style: kHeadlineSmall.copyWith(
-                                fontSize: 13,
-                                color: kPrimaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      _currentMovie.description,
-                      softWrap: true,
-                      style: kHeadlineSmall.copyWith(
-                        color: kPrimaryColor,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      'Trailer',
-                      style: kHeadlineMedium.copyWith(
-                        fontSize: 22,
-                        color: kPrimaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    if (_isInitialized)
-                      YoutubePlayerBuilder(
-                        player: YoutubePlayer(
-                          controller: _youtubePlayerController,
-                          showVideoProgressIndicator: true,
-                          bottomActions: [],
-                        ),
-                        onEnterFullScreen: null,
-                        builder: (context, player) {
-                          return Column(
-                            children: [
-                              SizedBox(
-                                  width: double.infinity,
-                                  // height: 260,
-                                  child: player),
-                            ],
-                          );
-                        },
-                      ),
-                    SizedBox(height: 200),
-                    // SizedBox(height: 200),
                   ],
                 ),
               ),
@@ -247,5 +135,39 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
         ),
       ),
     );
+  }
+
+  void _initAnimController() {
+    _currentMovie = Provider.of<Movies>(context, listen: false).getCenterItem;
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _controller.forward(from: 0.5);
+    _controller.addListener(() {
+      setState(() {});
+    });
+  }
+
+  void _initYoutubeController() {
+    try {
+      _youtubePlayerController = YoutubePlayerController(
+          initialVideoId:
+              YoutubePlayer.convertUrlToId(_currentMovie.trailerUrl)!,
+          flags: const YoutubePlayerFlags(
+            autoPlay: false,
+            controlsVisibleAtStart: true,
+            showLiveFullscreenButton: false,
+            isLive: false,
+          ));
+      // ..addListener(() {
+      //   if (mounted) {
+      //     setState(() {});
+      //   }
+      // });
+    } catch (exception) {
+      print(exception.toString());
+      _isInitialized = false;
+    }
   }
 }
