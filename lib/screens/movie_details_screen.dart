@@ -24,6 +24,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
   late MovieItem _currentMovie;
   late AnimationController _controller;
   late YoutubePlayerController _youtubePlayerController;
+  ScrollController _scrollController = ScrollController();
   var _isInitialized = true;
   var _showBookingPage = false;
 
@@ -38,6 +39,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
   void dispose() {
     _controller.dispose();
     _youtubePlayerController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -98,6 +100,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                 ),
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
+                  controller: _scrollController,
                   children: [
                     if (!_showBookingPage)
                       ShowDescScreen(
@@ -113,6 +116,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                       showBottomPageCallBack: () {
                         setState(() {
                           _showBookingPage = true;
+                          _scrollController.animateTo(
+                            _scrollController.position.minScrollExtent,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeIn,
+                          );
                         });
                       },
                       showTopPageCallBack: () {

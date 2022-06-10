@@ -71,9 +71,61 @@ class ShowBookingScreen extends StatelessWidget {
             thickness: 1.5,
           ),
         ),
-        // SizedBox(
-        //   height: 300,
-        // ),
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  for (int i = 1; i < 5; i++)
+                    Column(
+                      children: [
+                        Text(i.toString()),
+                        Image.asset(
+                          'assets/images/unselected_seat.png',
+                          width: 80,
+                          height: 50,
+                        ),
+                      ],
+                    ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  for (int i = 5; i < 9; i++)
+                    Column(
+                      children: [
+                        Text(i.toString()),
+                        Image.asset(
+                          'assets/images/unselected_seat.png',
+                          width: 80,
+                          height: 50,
+                        ),
+                      ],
+                    ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  for (int i = 9; i < 13; i++)
+                    Column(
+                      children: [
+                        Text(i.toString()),
+                        Image.asset(
+                          'assets/images/unselected_seat.png',
+                          width: 80,
+                          height: 50,
+                        ),
+                      ],
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
