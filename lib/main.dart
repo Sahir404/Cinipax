@@ -1,4 +1,5 @@
 import 'package:cinepax_flutter/providers/booking_day_state_provider.dart';
+import 'package:cinepax_flutter/providers/seats_state_provider.dart';
 import 'package:cinepax_flutter/screens/home_screen.dart';
 import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => Movies()),
         ChangeNotifierProvider(
           create: (_) => BookingDayStateProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SeatsStateProvider(),
         ),
       ],
       child: MaterialApp(

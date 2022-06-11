@@ -1,12 +1,14 @@
 import 'package:cinepax_flutter/constants/constants.dart';
+import 'package:cinepax_flutter/providers/seats_state_provider.dart';
 import 'package:cinepax_flutter/widgets/day_widget.dart';
 import 'package:cinepax_flutter/widgets/show_dual_buttons.dart';
+import 'package:cinepax_flutter/widgets/show_seating_arrangement.dart';
 import 'package:flutter/material.dart';
-import '../providers/booking_day_state_provider.dart';
 import 'package:provider/provider.dart';
 
 class ShowBookingScreen extends StatelessWidget {
   var size;
+  int counter = 1;
 
   ShowBookingScreen({
     required this.size,
@@ -14,6 +16,8 @@ class ShowBookingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final seatsStateProvider =
+        Provider.of<SeatsStateProvider>(context, listen: false);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -46,7 +50,7 @@ class ShowBookingScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 10, right: 60),
           child: ShowDualButtons(
-            showTopButton: false,
+            showTopButton: seatsStateProvider.showGoldSeats,
             size: size,
             topBtnText: '12:00 PM',
             bottomBtnText: '04:00 PM',
@@ -71,59 +75,51 @@ class ShowBookingScreen extends StatelessWidget {
             thickness: 1.5,
           ),
         ),
+        Align(
+          alignment: Alignment.center,
+          child: ShowDualButtons(
+            size: size,
+            bottomBtnText: 'Gold',
+            topBtnText: 'Platinum',
+            showTopButton: false,
+            showTopPageCallBack: () {
+              seatsStateProvider.shouldShowGoldSeats(false);
+            },
+            showBottomPageCallBack: () {
+              seatsStateProvider.shouldShowGoldSeats(true);
+            },
+            horizontalMargin: size.width * 0.18,
+            horizontalPadding: 0,
+          ),
+        ),
+        Consumer<SeatsStateProvider>(builder: (context, provider, _) {
+          return provider.showGoldSeats
+              ? ShowSeatingArrangement(size: size)
+              : ShowSeatingArrangement(size: size);
+        }),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          child: Divider(
+            color: kPrimaryColor,
+            thickness: 1.5,
+          ),
+        ),
         Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Column(
-            children: [
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  for (int i = 1; i < 5; i++)
-                    Column(
-                      children: [
-                        Text(i.toString()),
-                        Image.asset(
-                          'assets/images/unselected_seat.png',
-                          width: 80,
-                          height: 50,
-                        ),
-                      ],
-                    ),
-                ],
+          padding: const EdgeInsets.only(bottom: 28, top: 10),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                backgroundColor: kPrimaryColor,
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  for (int i = 5; i < 9; i++)
-                    Column(
-                      children: [
-                        Text(i.toString()),
-                        Image.asset(
-                          'assets/images/unselected_seat.png',
-                          width: 80,
-                          height: 50,
-                        ),
-                      ],
-                    ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  for (int i = 9; i < 13; i++)
-                    Column(
-                      children: [
-                        Text(i.toString()),
-                        Image.asset(
-                          'assets/images/unselected_seat.png',
-                          width: 80,
-                          height: 50,
-                        ),
-                      ],
-                    ),
-                ],
-              ),
-            ],
+              child: const Text('Book Now'),
+            ),
           ),
         ),
       ],
