@@ -26,10 +26,10 @@ class HomeScreen extends StatelessWidget {
     _upcomingMovies = moviesProvider.getUpcomingMovies;
     return Scaffold(
       body: SafeArea(
-        // top: false,
+        top: false,
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(0),
-          physics: const AlwaysScrollableScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           child: Container(
             color: Colors.white,
             child: Column(
@@ -40,13 +40,13 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Image.asset(
                           _movies[movies.getCenterItemIndex].imagePath,
-                          height: size.height * 0.68,
+                          height: size.height * 0.75,
                           width: double.infinity,
                           fit: BoxFit.fill,
                         ),
                         BlurryContainer(
                           width: double.infinity,
-                          height: size.height * 0.68,
+                          height: size.height * 0.75,
                           blur: 10,
                           color: Colors.transparent,
                           borderRadius: const BorderRadius.all(Radius.zero),
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Padding(
                                 padding:
-                                    EdgeInsets.only(top: size.height * 0.099),
+                                    EdgeInsets.only(top: size.height * 0.15),
                                 child: CarouselSlider.builder(
                                   itemBuilder: (context, index, realIndex) {
                                     return MovieItemWidget(

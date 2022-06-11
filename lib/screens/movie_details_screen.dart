@@ -102,12 +102,20 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                   physics: const BouncingScrollPhysics(),
                   controller: _scrollController,
                   children: [
-                    if (!_showBookingPage)
-                      ShowDescScreen(
-                        currentMovie: _currentMovie,
-                        isInitialized: _isInitialized,
-                        youtubePlayerController: _youtubePlayerController,
+                    // if (!_showBookingPage)
+                    AnimatedOpacity(
+                      opacity: _showBookingPage ? 0 : 1,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                      child: Container(
+                        height: _showBookingPage ? 0 : null,
+                        child: ShowDescScreen(
+                          currentMovie: _currentMovie,
+                          isInitialized: _isInitialized,
+                          youtubePlayerController: _youtubePlayerController,
+                        ),
                       ),
+                    ),
                     ShowDualButtons(
                       size: size,
                       topBtnText: 'Description',

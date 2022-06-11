@@ -4,7 +4,6 @@ class SeatsStateProvider with ChangeNotifier {
   var _showGoldSeats = false;
   var _bookedSeatsGold = <int>[];
   var _bookedSeatsPlat = <int>[];
-  // List<bool> _seatsBooking= List.generate(50, (index) => false);
 
   void shouldShowGoldSeats(bool show) {
     _showGoldSeats = show;

@@ -2,6 +2,7 @@ import 'package:cinepax_flutter/providers/booking_day_state_provider.dart';
 import 'package:cinepax_flutter/providers/seats_state_provider.dart';
 import 'package:cinepax_flutter/screens/home_screen.dart';
 import 'package:cinepax_flutter/screens/movie_details_screen.dart';
+import 'package:cinepax_flutter/screens/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/user_auth_screen.dart';
@@ -20,6 +21,10 @@ class MyApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.grey,
+    ));
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Movies()),
@@ -40,6 +45,7 @@ class MyApp extends StatelessWidget {
         routes: {
           HomeScreen.routeName: (context) => HomeScreen(),
           MovieDetailsScreen.routeName: (context) => MovieDetailsScreen(),
+          PaymentScreen.routeName: (context) => PaymentScreen(),
         },
       ),
     );

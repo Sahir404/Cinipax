@@ -1,5 +1,6 @@
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/providers/seats_state_provider.dart';
+import 'package:cinepax_flutter/screens/payment_screen.dart';
 import 'package:cinepax_flutter/widgets/day_widget.dart';
 import 'package:cinepax_flutter/widgets/show_dual_buttons.dart';
 import 'package:cinepax_flutter/widgets/show_seating_arrangement.dart';
@@ -8,7 +9,6 @@ import 'package:provider/provider.dart';
 
 class ShowBookingScreen extends StatelessWidget {
   var size;
-  int counter = 1;
 
   ShowBookingScreen({
     required this.size,
@@ -109,7 +109,9 @@ class ShowBookingScreen extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(PaymentScreen.routeName);
+              },
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 backgroundColor: kPrimaryColor,
