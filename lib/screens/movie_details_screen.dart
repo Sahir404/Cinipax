@@ -106,8 +106,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     AnimatedOpacity(
                       opacity: _showBookingPage ? 0 : 1,
                       duration: const Duration(milliseconds: 500),
-                      curve: Curves.ease,
-                      child: Container(
+                      curve: Curves.easeIn,
+                      child: SizedBox(
                         height: _showBookingPage ? 0 : null,
                         child: ShowDescScreen(
                           currentMovie: _currentMovie,

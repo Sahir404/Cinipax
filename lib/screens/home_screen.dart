@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               Padding(
                                 padding:
-                                    EdgeInsets.only(top: size.height * 0.15),
+                                    EdgeInsets.only(top: size.height * 0.12),
                                 child: CarouselSlider.builder(
                                   itemBuilder: (context, index, realIndex) {
                                     return MovieItemWidget(
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                                     initialPage: 1,
                                     enableInfiniteScroll: false,
                                     // height: 800,
-                                    aspectRatio: 8 / 6,
+                                    aspectRatio: 8.8 / 7.7,
                                     viewportFraction: 0.55,
                                     onPageChanged: (index, reason) {
                                       Provider.of<Movies>(context,

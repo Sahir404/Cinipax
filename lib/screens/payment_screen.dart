@@ -1,3 +1,4 @@
+import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -9,7 +10,18 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(),
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                'Select Payment Method',
+                style: kHeadlineMedium,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

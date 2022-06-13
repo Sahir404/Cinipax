@@ -42,8 +42,8 @@ class ShowSeatingArrangement extends StatelessWidget {
                               builder: (context, provider, _) {
                             return Image.asset(
                               provider.getBookedSeats.contains(i)
-                                  ? 'assets/images/selected_seat.png'
-                                  : 'assets/images/unselected_seat.png',
+                                  ? 'assets/images/booked_seat.png'
+                                  : 'assets/images/unbooked_seat.png',
                               width: 80,
                               height: 50,
                             );

@@ -23,6 +23,7 @@ class MovieItemWidget extends StatelessWidget {
             : null;
       },
       child: Container(
+        // height: 200,
         decoration: BoxDecoration(
           border: currentItemIndex == centerItemIndex
               ? Border.all(color: Colors.white)
@@ -39,7 +40,7 @@ class MovieItemWidget extends StatelessWidget {
               color: Colors.transparent,
               child: Image.asset(
                 movies[currentItemIndex].imagePath,
-                fit: BoxFit.contain,
+                fit: BoxFit.fill,
               ),
             ),
           ),
