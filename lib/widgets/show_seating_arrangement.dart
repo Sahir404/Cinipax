@@ -31,8 +31,10 @@ class ShowSeatingArrangement extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         seatsStateProvider.getBookedSeats.contains(i)
-                            ? seatsStateProvider.unBookSeat(i)
-                            : seatsStateProvider.bookSeat(i);
+                            ? null
+                            : seatsStateProvider.getSelectedSeats.contains(i)
+                                ? seatsStateProvider.unSelectSeat(i)
+                                : seatsStateProvider.selectSeat(i);
                       },
                       child: Column(
                         children: [
@@ -43,7 +45,11 @@ class ShowSeatingArrangement extends StatelessWidget {
                             return Image.asset(
                               provider.getBookedSeats.contains(i)
                                   ? 'assets/images/booked_seat.png'
-                                  : 'assets/images/unbooked_seat.png',
+                                  : provider.getSelectedSeats.isEmpty
+                                      ? 'assets/images/unbooked_seat.png'
+                                      : provider.getSelectedSeats.contains(i)
+                                          ? 'assets/images/selected_seat.png'
+                                          : 'assets/images/unbooked_seat.png',
                               width: 80,
                               height: 50,
                             );

@@ -18,6 +18,7 @@ class ShowBookingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final seatsStateProvider =
         Provider.of<SeatsStateProvider>(context, listen: false);
+    seatsStateProvider.resetSelectedSeats();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
