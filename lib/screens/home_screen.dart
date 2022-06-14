@@ -30,188 +30,202 @@ class HomeScreen extends StatelessWidget {
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(0),
           physics: const ClampingScrollPhysics(),
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                Consumer<Movies>(
-                  builder: (context, movies, child) {
-                    return Stack(
-                      children: [
-                        Image.asset(
-                          _movies[movies.getCenterItemIndex].imagePath,
-                          height: size.height * 0.75,
-                          width: double.infinity,
-                          fit: BoxFit.fill,
-                        ),
-                        BlurryContainer(
-                          width: double.infinity,
-                          height: size.height * 0.75,
-                          blur: 10,
-                          color: Colors.transparent,
-                          borderRadius: const BorderRadius.all(Radius.zero),
-                          padding: const EdgeInsets.all(0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsets.only(top: size.height * 0.12),
-                                child: CarouselSlider.builder(
-                                  itemBuilder: (context, index, realIndex) {
-                                    return MovieItemWidget(
-                                      currentItemIndex: index,
-                                      centerItemIndex:
-                                          movies.getCenterItemIndex,
-                                    );
-                                  },
-                                  itemCount: _movies.length,
-                                  options: CarouselOptions(
-                                    autoPlay: false,
-                                    scrollDirection: Axis.horizontal,
-                                    enlargeCenterPage: true,
-                                    // enlargeStrategy: CenterPageEnlargeStrategy.height,
-                                    initialPage: 1,
-                                    enableInfiniteScroll: false,
-                                    // height: 800,
-                                    aspectRatio: 8.8 / 7.7,
-                                    viewportFraction: 0.55,
-                                    onPageChanged: (index, reason) {
-                                      Provider.of<Movies>(context,
-                                              listen: false)
-                                          .setCenterItemIndex(index);
-                                    },
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 30),
-                              Hero(
-                                tag:
-                                    'title-tag-${_movies[movies.getCenterItemIndex].id}',
-                                child: Material(
-                                  type: MaterialType.transparency,
-                                  child: Text(
-                                    _movies[movies.getCenterItemIndex].title,
-                                    style: kHeadlineLarge,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Hero(
-                                tag:
-                                    'ratings-tag-${_movies[movies.getCenterItemIndex].id}',
-                                child: Material(
-                                  type: MaterialType.transparency,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Text('Ratings : ',
-                                          style: kHeadlineSmall),
-                                      ...Utils.getRatings(
-                                        _movies[movies.getCenterItemIndex]
-                                            .ratingInStars,
-                                        Colors.white,
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 0,
+                child: Image.asset(
+                    'assets/images/upcoming_movies/upcoming_movies_background.png'),
+              ),
+              Container(
+                color: Colors.transparent,
+                height: size.height * 1.16,
+                child: Stack(
+                  children: [
+                    Consumer<Movies>(
+                      builder: (context, movies, child) {
+                        return Stack(
+                          children: [
+                            Image.asset(
+                              _movies[movies.getCenterItemIndex].imagePath,
+                              height: size.height * 0.75,
+                              width: double.infinity,
+                              fit: BoxFit.fill,
+                            ),
+                            BlurryContainer(
+                              width: double.infinity,
+                              height: size.height * 0.75,
+                              blur: 10,
+                              color: Colors.transparent,
+                              borderRadius: const BorderRadius.all(Radius.zero),
+                              padding: const EdgeInsets.all(0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: size.height * 0.12),
+                                    child: CarouselSlider.builder(
+                                      itemBuilder: (context, index, realIndex) {
+                                        return MovieItemWidget(
+                                          currentItemIndex: index,
+                                          centerItemIndex:
+                                              movies.getCenterItemIndex,
+                                        );
+                                      },
+                                      itemCount: _movies.length,
+                                      options: CarouselOptions(
+                                        autoPlay: false,
+                                        scrollDirection: Axis.horizontal,
+                                        enlargeCenterPage: true,
+                                        // enlargeStrategy: CenterPageEnlargeStrategy.height,
+                                        initialPage: 1,
+                                        enableInfiniteScroll: false,
+                                        // height: 800,
+                                        aspectRatio: 8.8 / 7.7,
+                                        viewportFraction: 0.55,
+                                        onPageChanged: (index, reason) {
+                                          Provider.of<Movies>(context,
+                                                  listen: false)
+                                              .setCenterItemIndex(index);
+                                        },
                                       ),
-                                    ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 30),
+                                  Hero(
+                                    tag:
+                                        'title-tag-${_movies[movies.getCenterItemIndex].id}',
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: Text(
+                                        _movies[movies.getCenterItemIndex]
+                                            .title,
+                                        style: kHeadlineLarge,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Hero(
+                                    tag:
+                                        'ratings-tag-${_movies[movies.getCenterItemIndex].id}',
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Text('Ratings : ',
+                                              style: kHeadlineSmall),
+                                          ...Utils.getRatings(
+                                            _movies[movies.getCenterItemIndex]
+                                                .ratingInStars,
+                                            Colors.white,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Hero(
+                                    tag:
+                                        'genre-tag-${_movies[movies.getCenterItemIndex].id}',
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: Text(
+                                        'Genre : ${_movies[movies.getCenterItemIndex].genre}',
+                                        style: kHeadlineSmall,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              bottom: -18,
+                              left: 0,
+                              child: RotationTransition(
+                                turns: const AlwaysStoppedAnimation(-8 / 360),
+                                child: Container(
+                                  width: size.width / 2 + 4,
+                                  height: 40,
+                                  decoration: const BoxDecoration(
+                                    // border: Border.all(color: Colors.green, width: 2),
+                                    border: Border(
+                                      top: BorderSide(
+                                          color: Colors.transparent, width: 2),
+                                    ),
+                                    color: Colors.transparent,
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/upcoming_movies/upcoming_movies_background.png',
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 8),
-                              Hero(
-                                tag:
-                                    'genre-tag-${_movies[movies.getCenterItemIndex].id}',
-                                child: Material(
-                                  type: MaterialType.transparency,
-                                  child: Text(
-                                    'Genre : ${_movies[movies.getCenterItemIndex].genre}',
-                                    style: kHeadlineSmall,
+                            ),
+                            Positioned(
+                              bottom: -18,
+                              right: 0,
+                              child: RotationTransition(
+                                turns: AlwaysStoppedAnimation(8 / 360),
+                                child: Container(
+                                  width: size.width / 2 + 4,
+                                  height: 40,
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      top: BorderSide(
+                                          color: Colors.transparent, width: 2),
+                                    ),
+                                    color: Colors.transparent,
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/upcoming_movies/upcoming_movies_background.png',
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    Positioned(
+                      bottom: 10,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/images/cinepax_logo.png',
+                            width: 140,
+                            height: 80,
+                            alignment: Alignment.center,
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        Positioned(
-                          bottom: -18,
-                          left: 0,
-                          child: RotationTransition(
-                            turns: const AlwaysStoppedAnimation(-8 / 360),
-                            child: Container(
-                              width: size.width / 2 + 4,
-                              height: 40,
-                              decoration: const BoxDecoration(
-                                // border: Border.all(color: Colors.green, width: 2),
-                                border: Border(
-                                  top: BorderSide(
-                                      color: Colors.transparent, width: 2),
-                                ),
-                                color: Colors.white,
-                              ),
+                          const SizedBox(height: 6),
+                          const Text(
+                            'Upcoming movies',
+                            style: kHeadlineMedium,
+                          ),
+                          const SizedBox(height: 20),
+                          SizedBox(
+                            width: size.width,
+                            height: 210,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: _upcomingMovies.length,
+                              itemBuilder: (context, index) {
+                                return UpcomingMovie(index: index, size: size);
+                              },
                             ),
                           ),
-                        ),
-                        Positioned(
-                          bottom: -18,
-                          right: 0,
-                          child: RotationTransition(
-                            turns: AlwaysStoppedAnimation(8 / 360),
-                            child: Container(
-                              width: size.width / 2 + 4,
-                              height: 40,
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                  top: BorderSide(
-                                      color: Colors.transparent, width: 2),
-                                ),
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                Image.asset(
-                  'assets/images/cinepax_logo.png',
-                  width: 120,
-                  height: 50,
-                  alignment: Alignment.center,
-                  fit: BoxFit.fitWidth,
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Upcoming movies',
-                  style: kHeadlineMedium,
-                ),
-                const SizedBox(height: 24),
-                SizedBox(
-                  width: size.width,
-                  height: 200,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: _upcomingMovies.length,
-                    itemBuilder: (context, index) {
-                      return UpcomingMovie(index: index, size: size);
-                    },
-                  ),
-                ),
-                // SizedBox(
-                //   // height: 400,
-                //   // width: size.width,
-                //   child: ListView.builder(
-                //     shrinkWrap: true,
-                //     scrollDirection: Axis.horizontal,
-                //     physics: BouncingScrollPhysics(),
-                //     itemCount: _upcomingMovies.length,
-                //     itemBuilder: (context, index) {
-                //       return UpcomingMovie(index: index, size: size);
-                //     },
-                //   ),
-                // ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -8,6 +8,7 @@ class MovieItem {
   String director;
   String length;
   String trailerUrl;
+  String releaseDate;
 
   MovieItem({
     required this.id,
@@ -19,5 +20,6 @@ class MovieItem {
     required this.director,
     required this.length,
     required this.trailerUrl,
+    this.releaseDate = '',
   });
 }

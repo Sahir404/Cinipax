@@ -17,23 +17,44 @@ class UpcomingMovie extends StatelessWidget {
     _upcomingMovies = Provider.of<Movies>(context).getUpcomingMovies;
     return Container(
       width: 240,
-      height: 130,
-      margin: const EdgeInsets.only(left: 10),
-      padding: const EdgeInsets.all(10),
+      height: 190,
+      margin: const EdgeInsets.only(left: 20, bottom: 20),
+      padding: const EdgeInsets.all(3),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(12),
         ),
+        color: Colors.white,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(10),
             child: Image.asset(
-                'assets/images/upcoming_movies/sample_upcoming_movie1.png'),
+              _upcomingMovies[index].imagePath,
+            ),
           ),
-          Text(
-            _upcomingMovies[index].title,
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _upcomingMovies[index].title,
+                  style: kHeadlineSmall.copyWith(
+                    color: kPrimaryColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 1),
+                Text(
+                  'Expected RD: ${_upcomingMovies[index].releaseDate}',
+                ),
+              ],
+            ),
           ),
         ],
       ),
