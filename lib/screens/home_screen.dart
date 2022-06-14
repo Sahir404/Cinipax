@@ -185,20 +185,31 @@ class HomeScreen extends StatelessWidget {
                   style: kHeadlineMedium,
                 ),
                 const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: SizedBox(
-                    height: size.height * 0.76,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: _upcomingMovies.length,
-                      itemBuilder: (context, index) {
-                        return UpcomingMovie(index: index);
-                      },
-                    ),
+                SizedBox(
+                  width: size.width,
+                  height: 200,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: _upcomingMovies.length,
+                    itemBuilder: (context, index) {
+                      return UpcomingMovie(index: index, size: size);
+                    },
                   ),
                 ),
+                // SizedBox(
+                //   // height: 400,
+                //   // width: size.width,
+                //   child: ListView.builder(
+                //     shrinkWrap: true,
+                //     scrollDirection: Axis.horizontal,
+                //     physics: BouncingScrollPhysics(),
+                //     itemCount: _upcomingMovies.length,
+                //     itemBuilder: (context, index) {
+                //       return UpcomingMovie(index: index, size: size);
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),

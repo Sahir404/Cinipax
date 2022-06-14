@@ -8,61 +8,32 @@ import 'package:provider/provider.dart';
 class UpcomingMovie extends StatelessWidget {
   List<MovieItem> _upcomingMovies = [];
   final index;
+  final size;
 
-  UpcomingMovie({required this.index});
+  UpcomingMovie({required this.index, required this.size});
 
   @override
   Widget build(BuildContext context) {
     _upcomingMovies = Provider.of<Movies>(context).getUpcomingMovies;
     return Container(
-      width: double.infinity,
-      height: 120,
-      margin: const EdgeInsets.only(bottom: 20),
+      width: 240,
+      height: 130,
+      margin: const EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
-          Radius.circular(20),
+          Radius.circular(12),
         ),
       ),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
+      child: Column(
         children: [
-          Container(
-            width: double.infinity,
-            height: 120,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(14),
-              ),
-            ),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(14),
-              ),
-              child: Image.asset(
-                _upcomingMovies[index].imagePath,
-                fit: BoxFit.fill,
-              ),
-            ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+                'assets/images/upcoming_movies/sample_upcoming_movie1.png'),
           ),
-          BlurryContainer(
-            width: double.infinity,
-            height: 30,
-            blur: 3,
-            color: kUpcomingMovieTitleBackgroundColor,
-            // color: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(14),
-              bottomRight: Radius.circular(14),
-            ),
-            child: Text(
-              _upcomingMovies[index].title,
-              textAlign: TextAlign.center,
-              style: kHeadlineSmall.copyWith(
-                color: kPrimaryColor,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          Text(
+            _upcomingMovies[index].title,
           ),
         ],
       ),
