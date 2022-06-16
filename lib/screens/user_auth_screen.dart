@@ -360,7 +360,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 10, right: 50),
                         child: Text(
-                          'Forgot password?',
+                          'Forgot password ?',
                           textAlign: TextAlign.right,
                           style: kUserAuthSubTitle.copyWith(
                             fontWeight: FontWeight.bold,
