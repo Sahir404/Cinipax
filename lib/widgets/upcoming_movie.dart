@@ -18,7 +18,7 @@ class UpcomingMovie extends StatelessWidget {
     return Container(
       width: 240,
       height: 190,
-      margin: const EdgeInsets.only(left: 20, bottom: 20),
+      margin: const EdgeInsets.only(left: 20, bottom: 25),
       padding: const EdgeInsets.all(3),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(

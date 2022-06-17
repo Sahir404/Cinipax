@@ -5,6 +5,7 @@ import 'package:cinepax_flutter/widgets/day_widget.dart';
 import 'package:cinepax_flutter/widgets/show_dual_buttons.dart';
 import 'package:cinepax_flutter/widgets/show_seating_arrangement.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class ShowBookingScreen extends StatelessWidget {
@@ -111,7 +112,15 @@ class ShowBookingScreen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                // Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    type: PageTransitionType.fade,
+                    child: PaymentScreen(),
+                    curve: Curves.easeIn,
+                  ),
+                );
               },
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 25),

@@ -3,7 +3,9 @@ import 'package:cinepax_flutter/providers/seats_state_provider.dart';
 import 'package:cinepax_flutter/screens/home_screen.dart';
 import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:cinepax_flutter/screens/payment_screen.dart';
+import 'package:cinepax_flutter/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import './screens/user_auth_screen.dart';
 import './providers/movies.dart';
@@ -41,8 +43,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.black,
         ),
-        home: UserAuthScreen(),
+        home: SplashScreen(),
         routes: {
+          UserAuthScreen.routeName: (context) => UserAuthScreen(),
           HomeScreen.routeName: (context) => HomeScreen(),
           MovieDetailsScreen.routeName: (context) => MovieDetailsScreen(),
           PaymentScreen.routeName: (context) => PaymentScreen(),

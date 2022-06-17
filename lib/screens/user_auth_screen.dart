@@ -1,8 +1,10 @@
 import 'package:cinepax_flutter/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import '../constants/constants.dart';
 
 class UserAuthScreen extends StatefulWidget {
+  static const routeName = 'user-auth-screen/';
   const UserAuthScreen({Key? key}) : super(key: key);
 
   @override
@@ -360,7 +362,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 10, right: 50),
                         child: Text(
-                          'Forgot password ?',
+                          'Forgot password?',
                           textAlign: TextAlign.right,
                           style: kUserAuthSubTitle.copyWith(
                             fontWeight: FontWeight.bold,
@@ -386,7 +388,15 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                       elevation: MaterialStateProperty.all(6),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, HomeScreen.routeName);
+                      // Navigator.pushNamed(context, HomeScreen.routeName);
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.fade,
+                          child: HomeScreen(),
+                          curve: Curves.easeIn,
+                        ),
+                      );
                     },
                     child: Text(_createAccount ? 'Register' : 'Login'),
                   ),

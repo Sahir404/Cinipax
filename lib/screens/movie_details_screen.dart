@@ -74,7 +74,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     child: Image.asset(
                       _currentMovie.imagePath,
                       height: size.height * 0.7,
-                      fit: BoxFit.fitHeight,
+                      width: double.infinity,
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
                 ),

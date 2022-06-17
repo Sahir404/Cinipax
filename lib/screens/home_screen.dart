@@ -34,12 +34,16 @@ class HomeScreen extends StatelessWidget {
             children: [
               Positioned(
                 bottom: 0,
+                right: 0,
+                left: 0,
                 child: Image.asset(
-                    'assets/images/upcoming_movies/upcoming_movies_background.png'),
+                  'assets/images/upcoming_movies/upcoming_movies_background.png',
+                  fit: BoxFit.fitWidth,
+                ),
               ),
               Container(
                 color: Colors.transparent,
-                height: size.height * 1.16,
+                height: size.height * 1.18,
                 child: Stack(
                   children: [
                     Consumer<Movies>(
@@ -71,6 +75,7 @@ class HomeScreen extends StatelessWidget {
                                           currentItemIndex: index,
                                           centerItemIndex:
                                               movies.getCenterItemIndex,
+                                          size: size,
                                         );
                                       },
                                       itemCount: _movies.length,
@@ -81,9 +86,9 @@ class HomeScreen extends StatelessWidget {
                                         // enlargeStrategy: CenterPageEnlargeStrategy.height,
                                         initialPage: 1,
                                         enableInfiniteScroll: false,
-                                        // height: 800,
-                                        aspectRatio: 8.8 / 7.7,
-                                        viewportFraction: 0.55,
+                                        height: size.height * 0.4,
+                                        // aspectRatio: 8.8 / 7.7,
+                                        viewportFraction: 0.54,
                                         onPageChanged: (index, reason) {
                                           Provider.of<Movies>(context,
                                                   listen: false)
@@ -191,7 +196,7 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                     Positioned(
-                      bottom: 10,
+                      bottom: size.height * -0.01,
                       child: Column(
                         children: [
                           Image.asset(

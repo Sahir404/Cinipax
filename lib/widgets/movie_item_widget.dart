@@ -2,6 +2,7 @@
 import 'package:cinepax_flutter/models/movie_item.dart';
 import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '../providers/movies.dart';
 
@@ -9,9 +10,12 @@ class MovieItemWidget extends StatelessWidget {
   late List<MovieItem> movies;
   int centerItemIndex;
   int currentItemIndex;
+  final size;
 
   MovieItemWidget(
-      {required this.currentItemIndex, required this.centerItemIndex});
+      {required this.currentItemIndex,
+      required this.centerItemIndex,
+      required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +23,18 @@ class MovieItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         currentItemIndex == centerItemIndex
-            ? Navigator.of(context).pushNamed(MovieDetailsScreen.routeName)
+            ? Navigator.push(
+                context,
+                PageTransition(
+                  type: PageTransitionType.fade,
+                  child: MovieDetailsScreen(),
+                  curve: Curves.easeIn,
+                ),
+              )
             : null;
       },
       child: Container(
-        // height: 200,
+        width: size.width * 0.90,
         decoration: BoxDecoration(
           border: currentItemIndex == centerItemIndex
               ? Border.all(color: Colors.white)
