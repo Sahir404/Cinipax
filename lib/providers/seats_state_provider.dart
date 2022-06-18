@@ -6,6 +6,7 @@ class SeatsStateProvider with ChangeNotifier {
   var _bookedSeatsPlat = <int>[3, 4, 6, 32, 14, 12];
   var _selectedSeatsPlat = <int>[];
   var _selectedSeatsGold = <int>[];
+  var _ticketTime = '04:00 PM';
 
   void shouldShowGoldSeats(bool show) {
     _showGoldSeats = show;
@@ -64,5 +65,14 @@ class SeatsStateProvider with ChangeNotifier {
     _selectedSeatsPlat = <int>[];
     _selectedSeatsGold = <int>[];
     // notifyListeners();
+  }
+
+  void setTicketTime(String time) {
+    _ticketTime = time == 'noon' ? '12:00 PM' : '04:00 PM';
+    notifyListeners();
+  }
+
+  String get getTicketTime {
+    return _ticketTime;
   }
 }

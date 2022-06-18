@@ -40,6 +40,7 @@ dependencies:
   youtube_player_flutter: ^8.1.0
   page_transition: "^2.0.6"
   flutter_native_splash: ^2.2.3+1
+  flutter_swiper: ^1.1.6
 
 
 dev_dependencies:
@@ -69,6 +70,7 @@ flutter:
     - assets/images/
     - assets/images/samples/
     - assets/images/upcoming_movies/
+    - assets/images/payment_cards/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

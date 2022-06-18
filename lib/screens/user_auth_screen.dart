@@ -394,7 +394,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                         PageTransition(
                           type: PageTransitionType.fade,
                           child: HomeScreen(),
-                          curve: Curves.easeIn,
+                          curve: Curves.easeOut,
                         ),
                       );
                     },

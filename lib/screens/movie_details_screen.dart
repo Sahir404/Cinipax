@@ -75,7 +75,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                       _currentMovie.imagePath,
                       height: size.height * 0.7,
                       width: double.infinity,
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                 ),
@@ -137,8 +137,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                           _showBookingPage = false;
                         });
                       },
-                      horizontalPadding: 30,
-                      horizontalMargin: size.width * 0.09,
+                      topBtnPadding: 0,
+                      bottomBtnPadding: 0,
+                      marginRight: 75,
+                      marginLeft: 75,
+                      marginTop: 20,
                     ),
                     if (_showBookingPage)
                       ShowBookingScreen(

@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 color: Colors.transparent,
-                height: size.height * 1.18,
+                height: size.height * 1.16,
                 child: Stack(
                   children: [
                     Consumer<Movies>(
@@ -196,7 +196,7 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                     Positioned(
-                      bottom: size.height * -0.01,
+                      bottom: 12,
                       child: Column(
                         children: [
                           Image.asset(

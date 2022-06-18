@@ -49,18 +49,22 @@ class ShowBookingScreen extends StatelessWidget {
             style: kHeadlineMedium.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 10, right: 60),
-          child: ShowDualButtons(
-            showTopButton: seatsStateProvider.showGoldSeats,
-            size: size,
-            topBtnText: '12:00 PM',
-            bottomBtnText: '04:00 PM',
-            showBottomPageCallBack: () {},
-            showTopPageCallBack: () {},
-            horizontalPadding: 0,
-            horizontalMargin: 30,
-          ),
+        ShowDualButtons(
+          showTopButton: seatsStateProvider.showGoldSeats,
+          size: size,
+          topBtnText: '12:00 PM',
+          bottomBtnText: '04:00 PM',
+          showBottomPageCallBack: () {
+            seatsStateProvider.setTicketTime('noon');
+          },
+          showTopPageCallBack: () {
+            seatsStateProvider.setTicketTime('evening');
+          },
+          topBtnPadding: 10,
+          bottomBtnPadding: 0,
+          marginRight: 130,
+          marginLeft: 30,
+          marginTop: 30,
         ),
         const SizedBox(height: 35),
         Padding(
@@ -90,10 +94,14 @@ class ShowBookingScreen extends StatelessWidget {
             showBottomPageCallBack: () {
               seatsStateProvider.shouldShowGoldSeats(true);
             },
-            horizontalMargin: size.width * 0.18,
-            horizontalPadding: 0,
+            marginRight: 90,
+            marginLeft: 90,
+            marginTop: 10,
+            topBtnPadding: 14,
+            bottomBtnPadding: 16,
           ),
         ),
+        const SizedBox(height: 10),
         Consumer<SeatsStateProvider>(builder: (context, provider, _) {
           return provider.showGoldSeats
               ? ShowSeatingArrangement(size: size)
