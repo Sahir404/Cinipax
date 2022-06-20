@@ -61,6 +61,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 scrollDirection: Axis.horizontal,
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
