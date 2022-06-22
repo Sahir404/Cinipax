@@ -11,7 +11,7 @@ Color kPaymentScreenTextFieldColor = const Color(0xff1E1E1E);
 
 const TextStyle kUserAuthTitle = TextStyle(
   color: Colors.black,
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w600,
   fontSize: 25,
 );
 
@@ -22,7 +22,7 @@ const TextStyle kUserAuthSubTitle = TextStyle(
 const TextStyle kHeadlineLarge = TextStyle(
   color: Colors.white,
   fontSize: 25,
-  fontWeight: FontWeight.bold,
+  // fontWeight: FontWeight.bold,
 );
 const TextStyle kHeadlineSmall = TextStyle(
   color: Colors.white,
@@ -41,5 +41,4 @@ const TextStyle kHeadlineMedium = TextStyle(
 const TextStyle kTextFormFieldStyle = TextStyle(
   color: kTextFormFieldColor,
   fontSize: 16,
-  fontWeight: FontWeight.bold,
 );

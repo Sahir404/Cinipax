@@ -5,16 +5,22 @@ enum TICKET_TYPE {
 
 class Ticket {
   String movieTitle;
+  String imagePath;
   TICKET_TYPE ticketType;
-  double price;
+  double pricePerTicket;
+  int quantity;
   String location;
-  String time;
+  String movieTime;
+  DateTime bookingTime;
 
   Ticket({
     required this.movieTitle,
+    required this.imagePath,
     required this.ticketType,
-    required this.price,
+    required this.pricePerTicket,
+    required this.quantity,
     required this.location,
-    required this.time,
+    required this.movieTime,
+    required this.bookingTime,
   });
 }

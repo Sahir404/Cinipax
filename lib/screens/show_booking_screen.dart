@@ -1,5 +1,7 @@
 import 'package:cinepax_flutter/constants/constants.dart';
+import 'package:cinepax_flutter/models/movie_item.dart';
 import 'package:cinepax_flutter/providers/seats_state_provider.dart';
+import 'package:cinepax_flutter/providers/tickets.dart';
 import 'package:cinepax_flutter/screens/payment_screen.dart';
 import 'package:cinepax_flutter/widgets/day_widget.dart';
 import 'package:cinepax_flutter/widgets/show_dual_buttons.dart';
@@ -7,24 +9,26 @@ import 'package:cinepax_flutter/widgets/show_seating_arrangement.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import '../models/ticket.dart';
+import '../providers/movies.dart';
+import 'package:sizer/sizer.dart';
 
 class ShowBookingScreen extends StatelessWidget {
-  var size;
-
-  ShowBookingScreen({
-    required this.size,
-  });
+  late final MovieItem _currentMovie;
 
   @override
   Widget build(BuildContext context) {
     final seatsStateProvider =
         Provider.of<SeatsStateProvider>(context, listen: false);
+    final ticketsProvider = Provider.of<Tickets>(context, listen: false);
+    ticketsProvider.clearTickets();
     seatsStateProvider.resetSelectedSeats();
+    _currentMovie = Provider.of<Movies>(context, listen: false).getCenterItem;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 30, top: 40),
+          padding: const EdgeInsets.only(left: 30, top: 30),
           child: Text(
             'Select Day',
             style: kHeadlineMedium.copyWith(fontWeight: FontWeight.bold),
@@ -51,7 +55,6 @@ class ShowBookingScreen extends StatelessWidget {
         ),
         ShowDualButtons(
           showTopButton: seatsStateProvider.showGoldSeats,
-          size: size,
           topBtnText: '12:00 PM',
           bottomBtnText: '04:00 PM',
           showBottomPageCallBack: () {
@@ -84,7 +87,6 @@ class ShowBookingScreen extends StatelessWidget {
         Align(
           alignment: Alignment.center,
           child: ShowDualButtons(
-            size: size,
             bottomBtnText: 'Gold',
             topBtnText: 'Platinum',
             showTopButton: false,
@@ -104,8 +106,8 @@ class ShowBookingScreen extends StatelessWidget {
         const SizedBox(height: 10),
         Consumer<SeatsStateProvider>(builder: (context, provider, _) {
           return provider.showGoldSeats
-              ? ShowSeatingArrangement(size: size)
-              : ShowSeatingArrangement(size: size);
+              ? ShowSeatingArrangement()
+              : ShowSeatingArrangement();
         }),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -120,7 +122,37 @@ class ShowBookingScreen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: ElevatedButton(
               onPressed: () {
-                // Navigator.of(context).pushNamed(PaymentScreen.routeName);
+                // populate tickets
+                Map<String, List<int>> allSeats =
+                    seatsStateProvider.getAllSelectedSeats;
+                ticketsProvider.bookTicket(
+                  Ticket(
+                    movieTitle: _currentMovie.title,
+                    imagePath: _currentMovie.imagePath,
+                    ticketType: TICKET_TYPE.GOLD,
+                    pricePerTicket: 800,
+                    quantity: allSeats['gold']!.length,
+                    movieTime: seatsStateProvider.getTicketTime,
+                    location: '',
+                    bookingTime: DateTime.now(),
+                  ),
+                );
+                ticketsProvider.bookTicket(
+                  Ticket(
+                    movieTitle: _currentMovie.title,
+                    imagePath: _currentMovie.imagePath,
+                    ticketType: TICKET_TYPE.PLATINUM,
+                    pricePerTicket: 800,
+                    quantity: allSeats['plat']!.length,
+                    movieTime: seatsStateProvider.getTicketTime,
+                    location: '',
+                    bookingTime: DateTime.now(),
+                  ),
+                );
+                if (allSeats['gold']!.isEmpty && allSeats['plat']!.isEmpty) {
+                  return;
+                }
+                // navigate to paymentScreen
                 Navigator.push(
                   context,
                   PageTransition(

@@ -388,7 +388,6 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                       elevation: MaterialStateProperty.all(6),
                     ),
                     onPressed: () {
-                      // Navigator.pushNamed(context, HomeScreen.routeName);
                       Navigator.push(
                         context,
                         PageTransition(
@@ -408,7 +407,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                         ? 'Create New Account'
                         : 'Already have an account ?',
                     style: kUserAuthSubTitle.copyWith(
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w600,
                       fontSize: 18,
                     ),
                     textAlign: TextAlign.center,

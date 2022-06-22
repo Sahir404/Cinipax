@@ -1,5 +1,3 @@
-import 'package:cinepax_flutter/dummy_data/dummy_data.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import '../constants/constants.dart';
@@ -10,6 +8,7 @@ import '../providers/movies.dart';
 import '../widgets/movie_item_widget.dart';
 import '../widgets/upcoming_movie.dart';
 import '../utils.dart';
+import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'home-screen/';
@@ -20,7 +19,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final moviesProvider = Provider.of<Movies>(context, listen: false);
     _movies = moviesProvider.getAllMovies;
     _upcomingMovies = moviesProvider.getUpcomingMovies;
@@ -43,7 +41,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 color: Colors.transparent,
-                height: size.height * 1.16,
+                height: 100.h * 1.17,
                 child: Stack(
                   children: [
                     Consumer<Movies>(
@@ -52,13 +50,13 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Image.asset(
                               _movies[movies.getCenterItemIndex].imagePath,
-                              height: size.height * 0.75,
+                              height: 76.h,
                               width: double.infinity,
                               fit: BoxFit.fill,
                             ),
                             BlurryContainer(
                               width: double.infinity,
-                              height: size.height * 0.75,
+                              height: 76.h,
                               blur: 10,
                               color: Colors.transparent,
                               borderRadius: const BorderRadius.all(Radius.zero),
@@ -67,15 +65,13 @@ class HomeScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                        top: size.height * 0.12),
+                                    padding: EdgeInsets.only(top: 12.h),
                                     child: CarouselSlider.builder(
                                       itemBuilder: (context, index, realIndex) {
                                         return MovieItemWidget(
                                           currentItemIndex: index,
                                           centerItemIndex:
                                               movies.getCenterItemIndex,
-                                          size: size,
                                         );
                                       },
                                       itemCount: _movies.length,
@@ -86,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                                         // enlargeStrategy: CenterPageEnlargeStrategy.height,
                                         initialPage: 1,
                                         enableInfiniteScroll: false,
-                                        height: size.height * 0.4,
+                                        height: 40.h,
                                         // aspectRatio: 8.8 / 7.7,
                                         viewportFraction: 0.54,
                                         onPageChanged: (index, reason) {
@@ -152,7 +148,7 @@ class HomeScreen extends StatelessWidget {
                               child: RotationTransition(
                                 turns: const AlwaysStoppedAnimation(-8 / 360),
                                 child: Container(
-                                  width: size.width / 2 + 4,
+                                  width: 100.w / 2 + 4,
                                   height: 40,
                                   decoration: const BoxDecoration(
                                     // border: Border.all(color: Colors.green, width: 2),
@@ -175,7 +171,7 @@ class HomeScreen extends StatelessWidget {
                               child: RotationTransition(
                                 turns: AlwaysStoppedAnimation(8 / 360),
                                 child: Container(
-                                  width: size.width / 2 + 4,
+                                  width: 100.w / 2 + 4,
                                   height: 40,
                                   decoration: const BoxDecoration(
                                     border: Border(
@@ -196,7 +192,7 @@ class HomeScreen extends StatelessWidget {
                       },
                     ),
                     Positioned(
-                      bottom: 12,
+                      bottom: 0,
                       child: Column(
                         children: [
                           Image.asset(
@@ -212,15 +208,16 @@ class HomeScreen extends StatelessWidget {
                             style: kHeadlineMedium,
                           ),
                           const SizedBox(height: 20),
-                          SizedBox(
-                            width: size.width,
+                          Container(
+                            width: 100.w,
                             height: 210,
+                            margin: const EdgeInsets.only(bottom: 10),
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               physics: const BouncingScrollPhysics(),
                               itemCount: _upcomingMovies.length,
                               itemBuilder: (context, index) {
-                                return UpcomingMovie(index: index, size: size);
+                                return UpcomingMovie(index: index);
                               },
                             ),
                           ),

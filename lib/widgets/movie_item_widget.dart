@@ -5,23 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '../providers/movies.dart';
+import 'package:sizer/sizer.dart';
 
 class MovieItemWidget extends StatelessWidget {
   late List<MovieItem> movies;
   int centerItemIndex;
   int currentItemIndex;
-  final size;
 
-  MovieItemWidget(
-      {required this.currentItemIndex,
-      required this.centerItemIndex,
-      required this.size});
+  MovieItemWidget({
+    required this.currentItemIndex,
+    required this.centerItemIndex,
+  });
 
   @override
   Widget build(BuildContext context) {
     movies = Provider.of<Movies>(context, listen: false).getAllMovies;
     return GestureDetector(
       onTap: () {
+        print('clicked');
         currentItemIndex == centerItemIndex
             ? Navigator.push(
                 context,
@@ -34,7 +35,7 @@ class MovieItemWidget extends StatelessWidget {
             : null;
       },
       child: Container(
-        width: size.width * 0.90,
+        width: 90.w,
         decoration: BoxDecoration(
           border: currentItemIndex == centerItemIndex
               ? Border.all(color: Colors.white)

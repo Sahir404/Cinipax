@@ -1,13 +1,11 @@
-import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/screens/show_booking_screen.dart';
 import 'package:cinepax_flutter/screens/show_desc_screen.dart';
 import 'package:cinepax_flutter/widgets/show_dual_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../models/movie_item.dart';
 import '../providers/movies.dart';
-import '../utils.dart';
+import 'package:sizer/sizer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
@@ -51,8 +49,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    print('build called');
+    print('movie details build called');
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
@@ -73,7 +70,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                     color: Colors.transparent,
                     child: Image.asset(
                       _currentMovie.imagePath,
-                      height: size.height * 0.7,
+                      height: 70.h,
                       width: double.infinity,
                       fit: BoxFit.fitHeight,
                     ),
@@ -89,9 +86,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 height: _showBookingPage
-                    ? _controller.value * size.height * 0.67 +
-                        size.height * 0.18
-                    : _controller.value * size.height * 0.67,
+                    ? _controller.value * 67.h + 18.h
+                    : _controller.value * 67.h,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -103,7 +99,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                   physics: const BouncingScrollPhysics(),
                   controller: _scrollController,
                   children: [
-                    // if (!_showBookingPage)
                     AnimatedOpacity(
                       opacity: _showBookingPage ? 0 : 1,
                       duration: const Duration(milliseconds: 500),
@@ -118,7 +113,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                       ),
                     ),
                     ShowDualButtons(
-                      size: size,
                       topBtnText: 'Description',
                       bottomBtnText: 'Booking',
                       showTopButton: _showBookingPage,
@@ -137,16 +131,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                           _showBookingPage = false;
                         });
                       },
-                      topBtnPadding: 0,
+                      topBtnPadding: -6,
                       bottomBtnPadding: 0,
-                      marginRight: 75,
-                      marginLeft: 75,
+                      marginRight: 65,
+                      marginLeft: 74,
                       marginTop: 20,
                     ),
-                    if (_showBookingPage)
-                      ShowBookingScreen(
-                        size: size,
-                      ),
+                    if (_showBookingPage) ShowBookingScreen(),
                   ],
                 ),
               ),

@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:sizer/sizer.dart';
 import '../providers/seats_state_provider.dart';
 
 class ShowSeatingArrangement extends StatelessWidget {
-  final size;
-
-  ShowSeatingArrangement({this.size});
-
   @override
   Widget build(BuildContext context) {
     final seatsStateProvider =
         Provider.of<SeatsStateProvider>(context, listen: false);
     return Container(
-      height: size.height * 0.4,
+      height: 40.h,
       padding: const EdgeInsets.only(left: 0),
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,

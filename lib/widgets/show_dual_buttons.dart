@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:sizer/sizer.dart';
 import '../constants/constants.dart';
 
 class ShowDualButtons extends StatefulWidget {
-  var size;
   String topBtnText;
   String bottomBtnText;
   var showTopButton;
@@ -16,7 +15,6 @@ class ShowDualButtons extends StatefulWidget {
   double marginTop;
 
   ShowDualButtons({
-    required this.size,
     required this.topBtnText,
     required this.bottomBtnText,
     required this.showTopButton,
@@ -42,6 +40,7 @@ class _ShowDualButtonsState extends State<ShowDualButtons> {
         left: widget.marginLeft,
         right: widget.marginRight,
         top: widget.marginTop,
+        bottom: 10,
       ),
       decoration: BoxDecoration(
         color: kPrimaryColor,
@@ -64,7 +63,7 @@ class _ShowDualButtonsState extends State<ShowDualButtons> {
                 padding: const EdgeInsets.only(left: 6),
                 margin: const EdgeInsets.only(left: 4),
                 alignment: Alignment.centerLeft,
-                width: widget.size.width * 0.32 - widget.topBtnPadding,
+                width: 32.w - widget.topBtnPadding,
                 decoration: BoxDecoration(
                   color: widget.showTopButton ? Colors.white : kPrimaryColor,
                   borderRadius: BorderRadius.circular(10),
@@ -96,7 +95,7 @@ class _ShowDualButtonsState extends State<ShowDualButtons> {
         },
         child: Container(
           height: 34,
-          width: widget.size.width * 0.30 - widget.bottomBtnPadding,
+          width: 30.w - widget.bottomBtnPadding,
           padding: const EdgeInsets.only(left: 10, right: 12),
           margin: const EdgeInsets.only(right: 4),
           alignment: Alignment.centerRight,

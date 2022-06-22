@@ -41,7 +41,6 @@ class PaymentScreenTextField extends StatelessWidget {
           child: TextFormField(
             style: kUserAuthSubTitle.copyWith(
               color: Colors.white,
-              fontWeight: FontWeight.w100,
             ),
             decoration: InputDecoration(
               hintText: textFieldHint,
@@ -49,7 +48,6 @@ class PaymentScreenTextField extends StatelessWidget {
               filled: true,
               hintStyle: kUserAuthSubTitle.copyWith(
                 color: Colors.white,
-                fontWeight: FontWeight.w100,
               ),
               alignLabelWithHint: true,
               contentPadding: const EdgeInsets.symmetric(
@@ -60,17 +58,17 @@ class PaymentScreenTextField extends StatelessWidget {
                 borderSide: BorderSide(
                   color: kPaymentScreenTextFieldColor,
                 ),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(6),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: kPaymentScreenTextFieldColor,
                 ),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(6),
               ),
             ),
             keyboardType: TextInputType.name,
-            textInputAction: TextInputAction.next,
+            textInputAction: TextInputAction.done,
           ),
         ),
       ],
