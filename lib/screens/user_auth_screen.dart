@@ -1,3 +1,4 @@
+import 'package:cinepax_flutter/screens/drawer_screen.dart';
 import 'package:cinepax_flutter/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -392,7 +393,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                         context,
                         PageTransition(
                           type: PageTransitionType.fade,
-                          child: HomeScreen(),
+                          child: DrawerScreen(),
                           curve: Curves.easeOut,
                         ),
                       );
