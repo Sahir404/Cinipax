@@ -31,7 +31,6 @@ class PaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('payment screen build called');
-    // final size = MediaQuery.of(context).size;
     _ticketsList = Provider.of<Tickets>(context, listen: false).getTickets;
     return Scaffold(
       backgroundColor: Colors.white,

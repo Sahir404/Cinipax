@@ -53,96 +53,108 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              // bottom: 0,
-              left: 0,
-              right: 0,
-              child: HeroMode(
-                enabled: _controller.value >= 1.0 ? true : false,
-                child: Hero(
-                  tag: 'current-movie-image-tag${_currentMovie.id}',
-                  transitionOnUserGestures: true,
-                  child: Material(
-                    type: MaterialType.transparency,
-                    color: Colors.transparent,
-                    child: Image.asset(
-                      _currentMovie.imagePath,
-                      height: 70.h,
-                      width: double.infinity,
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // top: size.height * 0.3,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                height: _showBookingPage
-                    ? _controller.value * 67.h + 18.h
-                    : _controller.value * 67.h,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
-                  ),
-                ),
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  controller: _scrollController,
-                  children: [
-                    AnimatedOpacity(
-                      opacity: _showBookingPage ? 0 : 1,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeIn,
-                      child: SizedBox(
-                        height: _showBookingPage ? 0 : null,
-                        child: ShowDescScreen(
-                          currentMovie: _currentMovie,
-                          isInitialized: _isInitialized,
-                          youtubePlayerController: _youtubePlayerController,
-                        ),
+        child: WillPopScope(
+          onWillPop: () async {
+            if (_showBookingPage) {
+              setState(() {
+                _showBookingPage = false;
+              });
+              return false;
+            } else {
+              return true;
+            }
+          },
+          child: Stack(
+            children: [
+              Positioned(
+                top: 0,
+                // bottom: 0,
+                left: 0,
+                right: 0,
+                child: HeroMode(
+                  enabled: _controller.value >= 1.0 ? true : false,
+                  child: Hero(
+                    tag: 'current-movie-image-tag${_currentMovie.id}',
+                    transitionOnUserGestures: true,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      color: Colors.transparent,
+                      child: Image.asset(
+                        _currentMovie.imagePath,
+                        height: 70.h,
+                        width: double.infinity,
+                        fit: BoxFit.fitHeight,
                       ),
                     ),
-                    ShowDualButtons(
-                      topBtnText: 'Description',
-                      bottomBtnText: 'Booking',
-                      showTopButton: _showBookingPage,
-                      showBottomPageCallBack: () {
-                        setState(() {
-                          _showBookingPage = true;
-                          _scrollController.animateTo(
-                            _scrollController.position.minScrollExtent,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeIn,
-                          );
-                        });
-                      },
-                      showTopPageCallBack: () {
-                        setState(() {
-                          _showBookingPage = false;
-                        });
-                      },
-                      topBtnPadding: -6,
-                      bottomBtnPadding: 0,
-                      marginRight: 65,
-                      marginLeft: 74,
-                      marginTop: 20,
-                    ),
-                    if (_showBookingPage) ShowBookingScreen(),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                // top: size.height * 0.3,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  height: _showBookingPage
+                      ? _controller.value * 67.h + 18.h
+                      : _controller.value * 67.h,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+                  child: ListView(
+                    physics: const BouncingScrollPhysics(),
+                    controller: _scrollController,
+                    children: [
+                      AnimatedOpacity(
+                        opacity: _showBookingPage ? 0 : 1,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeIn,
+                        child: SizedBox(
+                          height: _showBookingPage ? 0 : null,
+                          child: ShowDescScreen(
+                            currentMovie: _currentMovie,
+                            isInitialized: _isInitialized,
+                            youtubePlayerController: _youtubePlayerController,
+                          ),
+                        ),
+                      ),
+                      ShowDualButtons(
+                        topBtnText: 'Description',
+                        bottomBtnText: 'Booking',
+                        showTopButton: _showBookingPage,
+                        showBottomPageCallBack: () {
+                          setState(() {
+                            _showBookingPage = true;
+                            _scrollController.animateTo(
+                              _scrollController.position.minScrollExtent,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeIn,
+                            );
+                          });
+                        },
+                        showTopPageCallBack: () {
+                          setState(() {
+                            _showBookingPage = false;
+                          });
+                        },
+                        topBtnPadding: -6,
+                        bottomBtnPadding: 0,
+                        marginRight: 65,
+                        marginLeft: 74,
+                        marginTop: 20,
+                      ),
+                      if (_showBookingPage) ShowBookingScreen(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
