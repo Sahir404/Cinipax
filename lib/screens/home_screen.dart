@@ -1,3 +1,4 @@
+import 'package:cinepax_flutter/constants/custom_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import '../constants/constants.dart';
@@ -309,10 +310,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Positioned(
                         top: 40,
-                        left: 12,
+                        left: 14,
                         child: AnimateIcons(
-                          startIcon: Icons.menu_outlined,
-                          endIcon: Icons.arrow_back_rounded,
+                          startIcon: CustomIcons.left_alignment,
+                          endIcon: CustomIcons.arrow_left_1,
                           onEndIconPress: () {
                             _closeDrawer();
                             return true;

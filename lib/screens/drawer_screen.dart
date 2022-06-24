@@ -75,17 +75,17 @@ class DrawerScreenDetails extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: Colors.white38,
+                      backgroundColor: const Color(0xff2D3436),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(30),
                         child: Icon(
                           Icons.perm_identity,
-                          color: kPrimaryColor,
+                          color: Colors.black.withOpacity(0.6),
                           size: 30,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 24),
+                    const SizedBox(width: 22),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,13 +93,16 @@ class DrawerScreenDetails extends StatelessWidget {
                         Text(
                           'Hammad Memon',
                           style: kHeadlineSmall.copyWith(
-                            color: Colors.white70,
-                            fontWeight: FontWeight.w600,
+                            color: kPrimaryColor,
+                            letterSpacing: 2,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         Text(
                           '+92-331-046002',
-                          style: kUserAuthSubTitle.copyWith(color: Colors.grey),
+                          style: kUserAuthSubTitle.copyWith(
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     ),
@@ -117,7 +120,12 @@ class DrawerScreenDetails extends StatelessWidget {
                           color:
                               e.title == 'Home' ? Colors.white : kPrimaryColor,
                         ),
-                        title: Text(e.title),
+                        title: Text(
+                          e.title,
+                          style: TextStyle(
+                            letterSpacing: 0.7,
+                          ),
+                        ),
                         selected: (e.title == 'Home' ? true : false),
                         selectedColor: Colors.white,
                         contentPadding: const EdgeInsets.only(left: 25),
