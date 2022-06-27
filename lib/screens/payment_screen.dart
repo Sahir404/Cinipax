@@ -65,134 +65,137 @@ class PaymentScreen extends StatelessWidget {
                 // const SizedBox(height: 20),
               ],
             ),
-            Stack(
-              children: [
-                Container(
-                  height: 100.h - 101,
-                  color: kPaymentScreenTextFieldColor,
-                ),
-                SizedBox(
-                  height: 100.h - 101,
-                  child: NotificationListener<OverscrollIndicatorNotification>(
-                    onNotification:
-                        (OverscrollIndicatorNotification overscroll) {
-                      overscroll.disallowIndicator();
-                      return true;
-                    },
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(25),
-                                bottomRight: Radius.circular(25),
+            Expanded(
+              child: Stack(
+                children: [
+                  Container(
+                    height: 100.h - 101,
+                    color: kPaymentScreenTextFieldColor,
+                  ),
+                  SizedBox(
+                    height: 100.h - 101,
+                    child:
+                        NotificationListener<OverscrollIndicatorNotification>(
+                      onNotification:
+                          (OverscrollIndicatorNotification overscroll) {
+                        overscroll.disallowIndicator();
+                        return true;
+                      },
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: Column(
+                          children: [
+                            Container(
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(25),
+                                  bottomRight: Radius.circular(25),
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 100.w,
+                                    margin: const EdgeInsets.only(
+                                        left: 30, top: 20),
+                                    child: Swiper(
+                                      itemBuilder: (context, index) {
+                                        return images[index];
+                                      },
+                                      onIndexChanged: (index) {
+                                        // print(index);
+                                      },
+                                      itemCount: 3,
+                                      itemWidth: 230.0,
+                                      itemHeight: 180.0,
+                                      layout: SwiperLayout.STACK,
+                                      loop: true,
+                                      scrollDirection: Axis.horizontal,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 40),
+                                  PaymentScreenTextField(
+                                    textFieldLabel: 'Name on card',
+                                    textFieldHint: 'Enter name here',
+                                    marginLeft: 30,
+                                    marginRight: 30,
+                                  ),
+                                  const SizedBox(height: 30),
+                                  PaymentScreenTextField(
+                                    textFieldLabel: 'Card No.',
+                                    textFieldHint: 'Enter card no. here',
+                                    marginLeft: 30,
+                                    marginRight: 30,
+                                  ),
+                                  const SizedBox(height: 30),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: 150,
+                                        child: PaymentScreenTextField(
+                                          textFieldLabel: 'Expiry date',
+                                          textFieldHint: 'e.g. 12/24',
+                                          marginLeft: 30,
+                                          marginRight: 20,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 150,
+                                        child: PaymentScreenTextField(
+                                          textFieldLabel: 'CV',
+                                          textFieldHint: '- - -',
+                                          marginLeft: 30,
+                                          marginRight: 50,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                ],
                               ),
                             ),
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 100.w,
-                                  margin:
-                                      const EdgeInsets.only(left: 30, top: 20),
-                                  child: Swiper(
-                                    itemBuilder: (context, index) {
-                                      return images[index];
-                                    },
-                                    onIndexChanged: (index) {
-                                      // print(index);
-                                    },
-                                    itemCount: 3,
-                                    itemWidth: 230.0,
-                                    itemHeight: 180.0,
-                                    layout: SwiperLayout.STACK,
-                                    loop: true,
-                                    scrollDirection: Axis.horizontal,
+                            const SizedBox(height: 20),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.only(top: 20),
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(25),
+                                  topRight: Radius.circular(25),
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Billing',
+                                    style: kHeadlineMedium.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 40),
-                                PaymentScreenTextField(
-                                  textFieldLabel: 'Name on card',
-                                  textFieldHint: 'Enter name here',
-                                  marginLeft: 30,
-                                  marginRight: 30,
-                                ),
-                                const SizedBox(height: 30),
-                                PaymentScreenTextField(
-                                  textFieldLabel: 'Card No.',
-                                  textFieldHint: 'Enter card no. here',
-                                  marginLeft: 30,
-                                  marginRight: 30,
-                                ),
-                                const SizedBox(height: 30),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: 150,
-                                      child: PaymentScreenTextField(
-                                        textFieldLabel: 'Expiry date',
-                                        textFieldHint: 'e.g. 12/24',
-                                        marginLeft: 30,
-                                        marginRight: 20,
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 150,
-                                      child: PaymentScreenTextField(
-                                        textFieldLabel: 'CV',
-                                        textFieldHint: '- - -',
-                                        marginLeft: 30,
-                                        marginRight: 50,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 20),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.only(top: 20),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                topRight: Radius.circular(25),
+                                  const SizedBox(height: 30),
+                                  ..._ticketsList.map((ticket) {
+                                    if (ticket.quantity > 0) {
+                                      return BillingItem(ticket: ticket);
+                                    } else {
+                                      return Container();
+                                    }
+                                  }).toList(),
+                                  const SizedBox(height: 60),
+                                ],
                               ),
                             ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  'Billing',
-                                  style: kHeadlineMedium.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 30),
-                                ..._ticketsList.map((ticket) {
-                                  if (ticket.quantity > 0) {
-                                    return BillingItem(ticket: ticket);
-                                  } else {
-                                    return Container();
-                                  }
-                                }).toList(),
-                                const SizedBox(height: 60),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

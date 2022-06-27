@@ -43,6 +43,7 @@ dependencies:
   flutter_swiper: ^1.1.6
   sizer: ^2.0.15
   animate_icons: ^2.0.0
+  device_preview: ^1.1.0
 
 
 dev_dependencies:

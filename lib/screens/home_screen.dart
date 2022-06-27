@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Container(
                         color: Colors.transparent,
-                        height: 100.h * 1.20,
+                        height: 100.h < 700 ? 130.h : 122.h,
                         child: Stack(
                           children: [
                             Consumer<Movies>(
@@ -118,13 +118,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Image.asset(
                                       _movies[movies.getCenterItemIndex]
                                           .imagePath,
-                                      height: 79.h,
+                                      height: 100.h < 700 ? 81.h : 79.h,
                                       width: double.infinity,
                                       fit: BoxFit.fill,
                                     ),
                                     BlurryContainer(
                                       width: double.infinity,
-                                      height: 79.h,
+                                      height: 100.h < 700 ? 81.h : 79.h,
                                       blur: 10,
                                       color: Colors.transparent,
                                       borderRadius:
@@ -273,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                             ),
                             Positioned(
-                              bottom: -4,
+                              bottom: 100.h < 800 ? -4 : 14,
                               child: Column(
                                 children: [
                                   Image.asset(

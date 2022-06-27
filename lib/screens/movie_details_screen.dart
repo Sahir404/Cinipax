@@ -83,7 +83,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                         _currentMovie.imagePath,
                         height: 70.h,
                         width: double.infinity,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),
