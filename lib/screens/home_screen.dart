@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Container(
                         color: Colors.transparent,
-                        height: 100.h < 700 ? 130.h : 122.h,
+                        height: 100.h < 700 ? 130.h : 120.h,
                         child: Stack(
                           children: [
                             Consumer<Movies>(
