@@ -1,5 +1,4 @@
 import 'package:cinepax_flutter/screens/user_auth_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -34,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen>
         PageTransition(
           type: PageTransitionType.fade,
           child: UserAuthScreen(),
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
           curve: Curves.easeIn,
         ),
         (Route<dynamic> route) => false,
