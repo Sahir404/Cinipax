@@ -1,4 +1,5 @@
 import 'package:cinepax_flutter/providers/booking_day_state_provider.dart';
+import 'package:cinepax_flutter/providers/drawer_state_provider.dart';
 import 'package:cinepax_flutter/providers/seats_state_provider.dart';
 import 'package:cinepax_flutter/providers/tickets.dart';
 import 'package:cinepax_flutter/screens/home_screen.dart';
@@ -11,7 +12,6 @@ import './screens/user_auth_screen.dart';
 import './providers/movies.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
-import 'package:device_preview/device_preview.dart';
 
 void main() {
   // runApp(
@@ -46,6 +46,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => Tickets(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DrawerStateProvider(),
         ),
       ],
       child: Sizer(

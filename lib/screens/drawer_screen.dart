@@ -4,9 +4,10 @@ import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/constants/drawer_items.dart';
 import 'package:cinepax_flutter/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import '../providers/drawer_state_provider.dart';
 
-// this is comment
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({Key? key}) : super(key: key);
 
@@ -33,19 +34,26 @@ class DrawerScreen extends StatelessWidget {
               ),
             ),
             DrawerScreenDetails(),
-            Container(
-              transform: Matrix4.translationValues(190, 160, 0)..scale(0.62),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    const Color(0xffD3D3D3).withOpacity(0.1),
-                    const Color(0xff2D3436).withOpacity(0.7),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomLeft,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
+            Consumer<DrawerStateProvider>(
+              builder: (context, provider, child) {
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 250),
+                  transform: Matrix4.translationValues(
+                      provider.getXOffset, provider.getYOffset, 0)
+                    ..scale(provider.getScaleFactor),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        const Color(0xffD3D3D3).withOpacity(0.1),
+                        const Color(0xff2D3436).withOpacity(0.7),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomLeft,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                );
+              },
             ),
             HomeScreen(),
           ],
@@ -123,7 +131,7 @@ class DrawerScreenDetails extends StatelessWidget {
                         ),
                         title: Text(
                           e.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             letterSpacing: 0.7,
                           ),
                         ),

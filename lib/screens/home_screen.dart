@@ -11,6 +11,7 @@ import '../widgets/upcoming_movie.dart';
 import '../utils.dart';
 import 'package:sizer/sizer.dart';
 import 'package:animate_icons/animate_icons.dart';
+import '../providers/drawer_state_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = 'home-screen/';
@@ -42,12 +43,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     print('home build called');
     final moviesProvider = Provider.of<Movies>(context, listen: false);
+    final drawerStateProvider =
+        Provider.of<DrawerStateProvider>(context, listen: false);
     _movies = moviesProvider.getAllMovies;
     _upcomingMovies = moviesProvider.getUpcomingMovies;
     return WillPopScope(
       onWillPop: () async {
         if (isDrawerOpen) {
           _closeDrawer();
+          drawerStateProvider.closeDrawer();
           if (_animateIconController.isEnd()) {
             _animateIconController.animateToStart();
           }
@@ -56,35 +60,37 @@ class _HomeScreenState extends State<HomeScreen> {
           return true;
         }
       },
-      child: GestureDetector(
-        onTap: () {
-          if (isDrawerOpen) {
-            _closeDrawer();
-            if (_animateIconController.isEnd()) {
-              _animateIconController.animateToStart();
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        transform: Matrix4.translationValues(xOffset, yOffset, 0)
+          ..scale(scaleFactor),
+        child: GestureDetector(
+          onTap: () {
+            if (isDrawerOpen) {
+              _closeDrawer();
+              drawerStateProvider.closeDrawer();
+              if (_animateIconController.isEnd()) {
+                _animateIconController.animateToStart();
+              }
             }
-          }
-        },
-        onHorizontalDragStart: (details) {
-          isDragging = true;
-        },
-        onHorizontalDragUpdate: (details) {
-          if (!isDragging) return;
-          const delta = 1;
-          if (details.delta.dx < -delta) {
-            _closeDrawer();
-            if (_animateIconController.isEnd()) {
-              _animateIconController.animateToStart();
+          },
+          onHorizontalDragStart: (details) {
+            isDragging = true;
+          },
+          onHorizontalDragUpdate: (details) {
+            if (!isDragging) return;
+            const delta = 1;
+            if (details.delta.dx < -delta) {
+              _closeDrawer();
+              drawerStateProvider.closeDrawer();
+              if (_animateIconController.isEnd()) {
+                _animateIconController.animateToStart();
+              }
             }
-          }
-          isDragging = false;
-        },
-        child: AbsorbPointer(
-          absorbing: isDrawerOpen ? true : false,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 250),
-            transform: Matrix4.translationValues(xOffset, yOffset, 0)
-              ..scale(scaleFactor),
+            isDragging = false;
+          },
+          child: AbsorbPointer(
+            absorbing: isDrawerOpen ? true : false,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(isDrawerOpen ? 20 : 0),
               child: NotificationListener<OverscrollIndicatorNotification>(
@@ -316,10 +322,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           endIcon: CustomIcons.arrow_left_1,
                           onEndIconPress: () {
                             _closeDrawer();
+                            drawerStateProvider.closeDrawer();
                             return true;
                           },
                           onStartIconPress: () {
                             _openDrawer();
+                            drawerStateProvider.openDrawer();
                             return true;
                           },
                           duration: const Duration(milliseconds: 400),
