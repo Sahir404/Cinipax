@@ -2,6 +2,7 @@ import 'package:cinepax_flutter/providers/booking_day_state_provider.dart';
 import 'package:cinepax_flutter/providers/drawer_state_provider.dart';
 import 'package:cinepax_flutter/providers/seats_state_provider.dart';
 import 'package:cinepax_flutter/providers/tickets.dart';
+import 'package:cinepax_flutter/screens/drawer_screen.dart';
 import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
 import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:cinepax_flutter/screens/payment_screen.dart';
