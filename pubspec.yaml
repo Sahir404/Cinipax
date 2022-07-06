@@ -44,6 +44,8 @@ dependencies:
   sizer: ^2.0.15
   animate_icons: ^2.0.0
   device_preview: ^1.1.0
+  property_change_notifier: ^0.3.0
+
 
 
 dev_dependencies:

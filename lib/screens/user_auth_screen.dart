@@ -1,5 +1,5 @@
 import 'package:cinepax_flutter/screens/drawer_screen.dart';
-import 'package:cinepax_flutter/screens/home_screen.dart';
+import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';

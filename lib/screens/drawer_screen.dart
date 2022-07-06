@@ -2,8 +2,9 @@ import 'dart:ui';
 
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/constants/drawer_items.dart';
-import 'package:cinepax_flutter/screens/home_screen.dart';
+import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:property_change_notifier/property_change_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../providers/drawer_state_provider.dart';
@@ -13,50 +14,67 @@ class DrawerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('drawer screen build called');
     return Scaffold(
       body: SafeArea(
         top: false,
-        child: Stack(
-          children: [
-            Container(
-              width: 100.w,
-              height: 100.h,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    const Color(0xff2D3436),
-                    const Color(0xff2D3436).withOpacity(0.4),
-                    // const Color(0xffD3D3D3),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+        child: PropertyChangeProvider<DrawerStateProvider, String>(
+          value: DrawerStateProvider(),
+          child: Stack(
+            children: [
+              Container(
+                width: 100.w,
+                height: 100.h,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      const Color(0xff2D3436),
+                      const Color(0xff2D3436).withOpacity(0.4),
+                      // const Color(0xffD3D3D3),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
                 ),
               ),
-            ),
-            DrawerScreenDetails(),
-            Consumer<DrawerStateProvider>(
-              builder: (context, provider, child) {
-                return AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
-                  transform: Matrix4.translationValues(
-                      provider.getXOffset, provider.getYOffset, 0)
-                    ..scale(provider.getScaleFactor),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color(0xffD3D3D3).withOpacity(0.1),
-                        const Color(0xff2D3436).withOpacity(0.7),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomLeft,
+              DrawerScreenDetails(),
+              Consumer<DrawerStateProvider>(
+                builder: (context, provider, child) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    transform: Matrix4.translationValues(
+                        provider.getXOffset, provider.getYOffset, 0)
+                      ..scale(provider.getScaleFactor),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color(0xffD3D3D3).withOpacity(0.1),
+                          const Color(0xff2D3436).withOpacity(0.7),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomLeft,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                );
-              },
-            ),
-            HomeScreen(),
-          ],
+                  );
+                },
+              ),
+              PropertyChangeConsumer<DrawerStateProvider, String>(
+                properties: const ['DRAWER_SELECTED_ITEM'],
+                builder: (context, provider, properties) {
+                  switch (provider?.getSelectedTileText) {
+                    case 'Home':
+                      return IntermediaryTransitionScreen(screen: 'Home');
+                    case 'Your Tickets':
+                      return IntermediaryTransitionScreen(
+                          screen: 'Your Tickets');
+                    default:
+                      return IntermediaryTransitionScreen(screen: 'Default');
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -121,28 +139,40 @@ class DrawerScreenDetails extends StatelessWidget {
               SizedBox(height: 5.h),
               ...DrawerItems.all
                   .map(
-                    (e) => Container(
-                      margin: const EdgeInsets.only(top: 14),
-                      child: ListTile(
-                        leading: Icon(
-                          e.iconData,
-                          color:
-                              e.title == 'Home' ? Colors.white : kPrimaryColor,
-                        ),
-                        title: Text(
-                          e.title,
-                          style: const TextStyle(
-                            letterSpacing: 0.7,
+                    (e) => PropertyChangeConsumer<DrawerStateProvider, String>(
+                      properties: const ['DRAWER_SELECTED_ITEM'],
+                      builder: (context, provider, properties) {
+                        return Container(
+                          margin: const EdgeInsets.only(top: 14),
+                          width: 180,
+                          child: ListTile(
+                            leading: Icon(
+                              e.iconData,
+                              color: e.title == provider?.getSelectedTileText
+                                  ? Colors.white
+                                  : kPrimaryColor,
+                            ),
+                            title: Text(
+                              e.title,
+                              style: const TextStyle(
+                                letterSpacing: 0.7,
+                              ),
+                            ),
+                            selected: (e.title == provider?.getSelectedTileText
+                                ? true
+                                : false),
+                            selectedColor: Colors.white,
+                            contentPadding: const EdgeInsets.only(left: 25),
+                            minVerticalPadding: 0,
+                            style: ListTileStyle.drawer,
+                            dense: true,
+                            horizontalTitleGap: 10,
+                            onTap: () {
+                              provider?.updateSelectedTileText(e.title);
+                            },
                           ),
-                        ),
-                        selected: (e.title == 'Home' ? true : false),
-                        selectedColor: Colors.white,
-                        contentPadding: const EdgeInsets.only(left: 25),
-                        minVerticalPadding: 0,
-                        style: ListTileStyle.drawer,
-                        dense: true,
-                        horizontalTitleGap: 10,
-                      ),
+                        );
+                      },
                     ),
                   )
                   .toList(),

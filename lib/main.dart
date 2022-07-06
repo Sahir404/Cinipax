@@ -2,7 +2,7 @@ import 'package:cinepax_flutter/providers/booking_day_state_provider.dart';
 import 'package:cinepax_flutter/providers/drawer_state_provider.dart';
 import 'package:cinepax_flutter/providers/seats_state_provider.dart';
 import 'package:cinepax_flutter/providers/tickets.dart';
-import 'package:cinepax_flutter/screens/home_screen.dart';
+import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
 import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:cinepax_flutter/screens/payment_screen.dart';
 import 'package:cinepax_flutter/screens/splash_screen.dart';
@@ -12,6 +12,7 @@ import './screens/user_auth_screen.dart';
 import './providers/movies.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
+import 'package:property_change_notifier/property_change_notifier.dart';
 
 void main() {
   // runApp(
@@ -64,12 +65,12 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Poppins-Medium',
             ),
             home: SplashScreen(),
-            routes: {
-              UserAuthScreen.routeName: (context) => UserAuthScreen(),
-              HomeScreen.routeName: (context) => HomeScreen(),
-              MovieDetailsScreen.routeName: (context) => MovieDetailsScreen(),
-              PaymentScreen.routeName: (context) => PaymentScreen(),
-            },
+            // routes: {
+            // UserAuthScreen.routeName: (context) => UserAuthScreen(),
+            // HomeScreen.routeName: (context) => HomeScreen(),
+            // MovieDetailsScreen.routeName: (context) => MovieDetailsScreen(),
+            // PaymentScreen.routeName: (context) => PaymentScreen(),
+            // },
           );
         },
       ),

@@ -1,7 +1,10 @@
+import 'package:cinepax_flutter/constants/drawer_items.dart';
 import 'package:flutter/material.dart';
+import 'package:property_change_notifier/property_change_notifier.dart';
 
-class DrawerStateProvider with ChangeNotifier {
+class DrawerStateProvider extends PropertyChangeNotifier<String> {
   bool _isDrawerOpen = false;
+  String _selectedTile = DrawerItems.all.first.title;
 
   bool get isDrawerOpen {
     return _isDrawerOpen;
@@ -27,5 +30,14 @@ class DrawerStateProvider with ChangeNotifier {
 
   double get getScaleFactor {
     return _isDrawerOpen ? 0.62 : 1;
+  }
+
+  void updateSelectedTileText(String tileText) {
+    _selectedTile = tileText;
+    notifyListeners('DRAWER_SELECTED_ITEM');
+  }
+
+  String get getSelectedTileText {
+    return _selectedTile;
   }
 }
