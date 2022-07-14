@@ -125,30 +125,34 @@ class ShowBookingScreen extends StatelessWidget {
                 // populate tickets
                 Map<String, List<int>> allSeats =
                     seatsStateProvider.getAllSelectedSeats;
-                ticketsProvider.bookTicket(
-                  Ticket(
-                    movieTitle: _currentMovie.title,
-                    imagePath: _currentMovie.imagePath,
-                    ticketType: TICKET_TYPE.GOLD,
-                    pricePerTicket: 800,
-                    quantity: allSeats['gold']!.length,
-                    movieTime: seatsStateProvider.getTicketTime,
-                    location: '',
-                    bookingTime: DateTime.now(),
-                  ),
-                );
-                ticketsProvider.bookTicket(
-                  Ticket(
-                    movieTitle: _currentMovie.title,
-                    imagePath: _currentMovie.imagePath,
-                    ticketType: TICKET_TYPE.PLATINUM,
-                    pricePerTicket: 800,
-                    quantity: allSeats['plat']!.length,
-                    movieTime: seatsStateProvider.getTicketTime,
-                    location: '',
-                    bookingTime: DateTime.now(),
-                  ),
-                );
+                if (allSeats['gold']!.isNotEmpty) {
+                  ticketsProvider.bookTicket(
+                    Ticket(
+                      movieTitle: _currentMovie.title,
+                      imagePath: _currentMovie.imagePath,
+                      ticketType: TICKET_TYPE.GOLD,
+                      pricePerTicket: 800,
+                      quantity: allSeats['gold']!.length,
+                      movieTime: seatsStateProvider.getTicketTime,
+                      location: 'Boulevard Mall, Hyderabad',
+                      bookingTime: DateTime.now(),
+                    ),
+                  );
+                }
+                if (allSeats['plat']!.isNotEmpty) {
+                  ticketsProvider.bookTicket(
+                    Ticket(
+                      movieTitle: _currentMovie.title,
+                      imagePath: _currentMovie.imagePath,
+                      ticketType: TICKET_TYPE.PLATINUM,
+                      pricePerTicket: 800,
+                      quantity: allSeats['plat']!.length,
+                      movieTime: seatsStateProvider.getTicketTime,
+                      location: 'Boulevard Mall, Hyderabad',
+                      bookingTime: DateTime.now(),
+                    ),
+                  );
+                }
                 if (allSeats['gold']!.isEmpty && allSeats['plat']!.isEmpty) {
                   return;
                 }

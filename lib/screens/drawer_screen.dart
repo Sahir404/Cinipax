@@ -1,8 +1,8 @@
 import 'dart:ui';
-
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/constants/drawer_items.dart';
 import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
+import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
 import 'package:provider/provider.dart';

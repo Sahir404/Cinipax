@@ -33,6 +33,7 @@ class DrawerStateProvider extends PropertyChangeNotifier<String> {
   }
 
   void updateSelectedTileText(String tileText) {
+    print('$tileText called');
     _selectedTile = tileText;
     notifyListeners('DRAWER_SELECTED_ITEM');
   }

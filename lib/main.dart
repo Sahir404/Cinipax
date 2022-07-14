@@ -7,6 +7,7 @@ import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
 import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:cinepax_flutter/screens/payment_screen.dart';
 import 'package:cinepax_flutter/screens/splash_screen.dart';
+import 'package:cinepax_flutter/screens/your_tickets_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/user_auth_screen.dart';

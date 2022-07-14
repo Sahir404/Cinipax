@@ -1,13 +1,30 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cinepax_flutter/constants/constants.dart';
+import 'package:cinepax_flutter/providers/tickets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:intl/intl.dart';
+import 'package:collection/collection.dart';
 
-class YourTicketsScreen extends StatelessWidget {
+import '../widgets/your_tickets_component.dart';
+
+class YourTicketsScreen extends StatefulWidget {
   const YourTicketsScreen({Key? key}) : super(key: key);
 
   @override
+  State<YourTicketsScreen> createState() => _YourTicketsScreenState();
+}
+
+class _YourTicketsScreenState extends State<YourTicketsScreen> {
+  int _index = 0;
+  final CarouselController _controller = CarouselController();
+
+  @override
   Widget build(BuildContext context) {
+    final tickets = Provider.of<Tickets>(context, listen: false).getTickets;
     return Stack(
       children: [
         Image.asset(
@@ -20,22 +37,24 @@ class YourTicketsScreen extends StatelessWidget {
           left: 0,
           right: 0,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 'Your Tickets',
-                style: kHeadlineMedium,
+                style: kHeadlineMedium.copyWith(
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 40),
               Stack(
                 alignment: Alignment.center,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
-                      'assets/images/samples/sample_movie2.png',
+                      tickets[_index].imagePath,
                       width: 92.w,
-                      height: 66.h,
+                      height: 68.h,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -44,12 +63,165 @@ class YourTicketsScreen extends StatelessWidget {
                     left: 10,
                     right: 10,
                     child: BlurryContainer(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(18),
                       blur: 25,
                       color: Colors.white.withOpacity(0.4),
                       height: 30.h,
-                      child: Column(
-                        children: [],
+                      child: Stack(
+                        children: [
+                          Column(
+                            children: [
+                              Expanded(
+                                child: CarouselSlider.builder(
+                                  itemBuilder: (context, index, realIndex) {
+                                    return Column(
+                                      children: [
+                                        const SizedBox(height: 10),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              tickets[index].movieTitle,
+                                              style: kHeadlineSmall.copyWith(
+                                                color: kPrimaryColor,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 14),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Image.asset(
+                                                'assets/images/icons/icon_location.png'),
+                                            const SizedBox(width: 5),
+                                            Text(tickets[_index].location),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 20),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            YourTicketsComponent(
+                                              imagePath:
+                                                  'assets/images/icons/icon_seats.png',
+                                              caption:
+                                                  '${tickets[_index].quantity} Seat/s',
+                                            ),
+                                            YourTicketsComponent(
+                                              imagePath:
+                                                  'assets/images/icons/icon_ticket_type.png',
+                                              caption: tickets[_index]
+                                                  .ticketType
+                                                  .name,
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 22),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            YourTicketsComponent(
+                                              imagePath:
+                                                  'assets/images/icons/icon_date.png',
+                                              caption: DateFormat('dd - LLL')
+                                                  .format(tickets[_index]
+                                                      .bookingTime),
+                                            ),
+                                            YourTicketsComponent(
+                                                imagePath:
+                                                    'assets/images/icons/icon_time.png',
+                                                caption:
+                                                    tickets[_index].movieTime),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                  itemCount: tickets.length,
+                                  carouselController: _controller,
+                                  options: CarouselOptions(
+                                    autoPlay: false,
+                                    scrollPhysics:
+                                        const AlwaysScrollableScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    initialPage: 0,
+                                    viewportFraction: 1,
+                                    enableInfiniteScroll: true,
+                                    onPageChanged: (index, reason) {
+                                      setState(() {
+                                        _index = index;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: tickets.mapIndexed((index, ticket) {
+                                  return Container(
+                                    width: _index == index ? 23 : 22,
+                                    height: _index == index ? 7 : 6,
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 4.0),
+                                    decoration: BoxDecoration(
+                                      color: _index == index
+                                          ? Colors.black
+                                          : Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: _index == index
+                                            ? Colors.white
+                                            : Colors.transparent,
+                                        width: 0.7,
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                          Positioned(
+                            left: 0,
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (_index == 0) {
+                                    _index = tickets.length - 1;
+                                    return;
+                                  }
+                                  _index--;
+                                });
+                                _controller.jumpToPage(_index);
+                              },
+                              icon: Image.asset(
+                                  'assets/images/icons/arrow_previous.png'),
+                            ),
+                          ),
+                          Positioned(
+                            right: 0,
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (_index == tickets.length - 1) {
+                                    _index = 0;
+                                    return;
+                                  }
+                                  _index++;
+                                });
+                                _controller.jumpToPage(_index);
+                              },
+                              icon: Image.asset(
+                                'assets/images/icons/arrow_next.png',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   )
