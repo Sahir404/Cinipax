@@ -1,7 +1,9 @@
+import 'package:cinepax_flutter/providers/drawer_state_provider.dart';
 import 'package:cinepax_flutter/screens/drawer_screen.dart';
 import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:property_change_notifier/property_change_notifier.dart';
 import 'package:sizer/sizer.dart';
 import '../constants/constants.dart';
 
@@ -52,7 +54,6 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(61.h);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(

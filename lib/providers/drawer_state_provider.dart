@@ -1,5 +1,4 @@
 import 'package:cinepax_flutter/constants/drawer_items.dart';
-import 'package:flutter/material.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
 
 class DrawerStateProvider extends PropertyChangeNotifier<String> {
@@ -33,8 +32,8 @@ class DrawerStateProvider extends PropertyChangeNotifier<String> {
   }
 
   void updateSelectedTileText(String tileText) {
-    print('$tileText called');
     _selectedTile = tileText;
+    print('$tileText called');
     notifyListeners('DRAWER_SELECTED_ITEM');
   }
 

@@ -1,4 +1,5 @@
 import 'package:cinepax_flutter/providers/booking_day_state_provider.dart';
+import 'package:cinepax_flutter/providers/congrats_card_state_provider.dart';
 import 'package:cinepax_flutter/providers/drawer_state_provider.dart';
 import 'package:cinepax_flutter/providers/seats_state_provider.dart';
 import 'package:cinepax_flutter/providers/tickets.dart';
@@ -52,6 +53,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => DrawerStateProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CongratsCardStateProvider(),
         ),
       ],
       child: Sizer(

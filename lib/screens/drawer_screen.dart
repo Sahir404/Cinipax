@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/constants/drawer_items.dart';
 import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
-import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +9,8 @@ import 'package:sizer/sizer.dart';
 import '../providers/drawer_state_provider.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
+  String? fromPaymentScreen;
+  DrawerScreen({this.fromPaymentScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +62,14 @@ class DrawerScreen extends StatelessWidget {
               PropertyChangeConsumer<DrawerStateProvider, String>(
                 properties: const ['DRAWER_SELECTED_ITEM'],
                 builder: (context, provider, properties) {
+                  if (fromPaymentScreen != null &&
+                      fromPaymentScreen == 'Your Tickets') {
+                    fromPaymentScreen = null;
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      provider?.updateSelectedTileText('Your Tickets');
+                    });
+                    return IntermediaryTransitionScreen(screen: 'Your Tickets');
+                  }
                   switch (provider?.getSelectedTileText) {
                     case 'Home':
                       return IntermediaryTransitionScreen(screen: 'Home');
@@ -82,8 +90,6 @@ class DrawerScreen extends StatelessWidget {
 }
 
 class DrawerScreenDetails extends StatelessWidget {
-  const DrawerScreenDetails({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
