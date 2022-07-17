@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+
 import '../providers/seats_state_provider.dart';
 
 class ShowSeatingArrangement extends StatelessWidget {

@@ -1,4 +1,3 @@
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/models/movie_item.dart';
 import 'package:cinepax_flutter/providers/movies.dart';

@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/constants/drawer_items.dart';
 import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+
 import '../providers/drawer_state_provider.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -108,7 +110,8 @@ class DrawerScreenDetails extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: const Color(0xff2D3436),
+                      // backgroundColor: const Color(0xff2D3436).withOpacity(0.4),
+                      backgroundColor: Colors.grey.withOpacity(0.6),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(30),
                         child: Icon(

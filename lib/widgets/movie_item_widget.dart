@@ -4,8 +4,9 @@ import 'package:cinepax_flutter/screens/movie_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '../providers/movies.dart';
 import 'package:sizer/sizer.dart';
+
+import '../providers/movies.dart';
 
 class MovieItemWidget extends StatelessWidget {
   late List<MovieItem> movies;
@@ -22,7 +23,6 @@ class MovieItemWidget extends StatelessWidget {
     movies = Provider.of<Movies>(context, listen: false).getAllMovies;
     return GestureDetector(
       onTap: () {
-        print('clicked');
         currentItemIndex == centerItemIndex
             ? Navigator.push(
                 context,

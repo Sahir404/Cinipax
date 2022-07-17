@@ -1,6 +1,7 @@
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+
 import '../models/ticket.dart';
 
 class BillingItem extends StatelessWidget {

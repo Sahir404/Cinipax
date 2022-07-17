@@ -3,11 +3,11 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/providers/tickets.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:intl/intl.dart';
-import 'package:collection/collection.dart';
 
 import '../widgets/your_tickets_component.dart';
 

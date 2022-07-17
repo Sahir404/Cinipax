@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '../models/ticket.dart';
 import 'package:sizer/sizer.dart';
+import '../constants/custom_icons.dart';
+import '../models/ticket.dart';
 import '../screens/drawer_screen.dart';
-
 import '../widgets/congrats_card.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -54,24 +54,23 @@ class PaymentScreen extends StatelessWidget {
         ),
         onPressed: () {
           if (congratsCardStateProvider.shouldShowCongratsCard) {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               PageTransition(
                 type: PageTransitionType.fade,
                 child: DrawerScreen(fromPaymentScreen: 'Your Tickets'),
                 curve: Curves.easeOut,
               ),
+              (route) => false,
             );
           }
           congratsCardStateProvider.showCongratsCard(
               !congratsCardStateProvider.shouldShowCongratsCard);
         },
-        child: Consumer<CongratsCardStateProvider>(
-          builder: (BuildContext context, provider, Widget? child) {
-            return Text(
-              provider.shouldShowCongratsCard ? 'Download Tickets' : 'Pay Now',
-            );
-          },
+        child: Text(
+          congratsCardStateProvider.shouldShowCongratsCard
+              ? 'Download Tickets'
+              : 'Pay Now',
         ),
       ),
       resizeToAvoidBottomInset: false,
@@ -87,17 +86,33 @@ class PaymentScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      children: [
-                        const SizedBox(height: 30),
-                        Text(
-                          'Select Payment Method',
-                          textAlign: TextAlign.center,
-                          style: kHeadlineMedium.copyWith(
-                              fontWeight: FontWeight.w700),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: SizedBox(
+                        height: 40,
+                        child: Stack(
+                          children: [
+                            Center(
+                              child: Text(
+                                'Select Payment Method',
+                                textAlign: TextAlign.center,
+                                style: kHeadlineMedium.copyWith(
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(CustomIcons.arrow_left_1,
+                                  color: Colors.black),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                splashFactory: NoSplash.splashFactory,
+                              ),
+                            ),
+                          ],
                         ),
-                        // const SizedBox(height: 20),
-                      ],
+                      ),
                     ),
                     Expanded(
                       child: Stack(

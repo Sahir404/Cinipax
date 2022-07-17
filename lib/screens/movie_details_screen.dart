@@ -3,10 +3,11 @@ import 'package:cinepax_flutter/screens/show_desc_screen.dart';
 import 'package:cinepax_flutter/widgets/show_dual_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/movie_item.dart';
-import '../providers/movies.dart';
 import 'package:sizer/sizer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import '../constants/custom_icons.dart';
+import '../models/movie_item.dart';
+import '../providers/movies.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   static const routeName = 'movie-details-screen/';
@@ -68,7 +69,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
             children: [
               Positioned(
                 top: 0,
-                // bottom: 0,
                 left: 0,
                 right: 0,
                 child: HeroMode(
@@ -90,7 +90,20 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                 ),
               ),
               Positioned(
-                // top: size.height * 0.3,
+                top: 10,
+                left: 10,
+                child: IconButton(
+                  icon:
+                      const Icon(CustomIcons.arrow_left_1, color: Colors.white),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    splashFactory: NoSplash.splashFactory,
+                  ),
+                ),
+              ),
+              Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,

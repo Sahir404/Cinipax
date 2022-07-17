@@ -1,10 +1,11 @@
+import 'package:animate_icons/animate_icons.dart';
 import 'package:cinepax_flutter/constants/custom_icons.dart';
 import 'package:cinepax_flutter/screens/home_screen.dart';
 import 'package:cinepax_flutter/screens/your_tickets_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
 import 'package:provider/provider.dart';
-import 'package:animate_icons/animate_icons.dart';
+
 import '../providers/drawer_state_provider.dart';
 import 'default_screen.dart';
 

@@ -9,9 +9,9 @@ import 'package:cinepax_flutter/widgets/show_seating_arrangement.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+
 import '../models/ticket.dart';
 import '../providers/movies.dart';
-import 'package:sizer/sizer.dart';
 
 class ShowBookingScreen extends StatelessWidget {
   late final MovieItem _currentMovie;

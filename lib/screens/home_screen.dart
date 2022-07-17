@@ -1,14 +1,15 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
+
+import '../constants/constants.dart';
+import '../models/movie_item.dart';
 import '../providers/movies.dart';
+import '../utils.dart';
 import '../widgets/movie_item_widget.dart';
 import '../widgets/upcoming_movie.dart';
-import '../utils.dart';
-import 'package:sizer/sizer.dart';
-import '../constants/constants.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import '../models/movie_item.dart';
 
 class HomeScreen extends StatelessWidget {
   List<MovieItem> _movies = [];
@@ -75,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   enlargeCenterPage: true,
                                   // enlargeStrategy: CenterPageEnlargeStrategy.height,
-                                  initialPage: 1,
+                                  initialPage: movies.getCenterItemIndex,
                                   enableInfiniteScroll: false,
                                   height: 40.h,
                                   // aspectRatio: 8.8 / 7.7,
