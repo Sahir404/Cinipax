@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/constants/drawer_items.dart';
 import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';

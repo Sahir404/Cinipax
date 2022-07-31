@@ -40,8 +40,4 @@ class DrawerStateProvider extends PropertyChangeNotifier<String> {
   String get getSelectedTileText {
     return _selectedTile;
   }
-
-  // DrawerStateProvider get getDrawerStateProvider{
-  //   return this;
-  // }
 }

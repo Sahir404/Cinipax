@@ -45,6 +45,13 @@ dependencies:
   animate_icons: ^2.0.0
   device_preview: ^1.1.0
   property_change_notifier: ^0.3.0
+  flutter_launcher_icons: ^0.9.2
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/cinepax_logo.png"
+  remove_alpha_ios: true
 
 
 
