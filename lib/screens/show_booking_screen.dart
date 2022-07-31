@@ -9,6 +9,7 @@ import 'package:cinepax_flutter/widgets/show_seating_arrangement.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../models/ticket.dart';
 import '../providers/movies.dart';
@@ -154,6 +155,15 @@ class ShowBookingScreen extends StatelessWidget {
                 );
                 // }
                 if (allSeats['gold']!.isEmpty && allSeats['plat']!.isEmpty) {
+                  // no seat selected
+                  Fluttertoast.showToast(
+                      msg: "Please select at least one seat",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.white,
+                      textColor: Colors.black,
+                      fontSize: 16.0);
                   return;
                 }
                 // navigate to paymentScreen

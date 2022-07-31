@@ -33,6 +33,9 @@ class UpcomingMovie extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
               _upcomingMovies[index].imagePath,
+              width: 240,
+              height: 135,
+              fit: BoxFit.fill,
             ),
           ),
           const SizedBox(height: 10),

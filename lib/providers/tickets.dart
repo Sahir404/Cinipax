@@ -20,19 +20,6 @@ class Tickets with ChangeNotifier {
       Ticket(
         movieTitle: 'KGF 2',
         imagePath: 'assets/images/samples/sample_movie1.png',
-        ticketType: TICKET_TYPE.GOLD,
-        pricePerTicket: 600,
-        quantity: 3,
-        location: 'Boulevard Mall, Hyderabad',
-        movieTime: '12:00 PM',
-        bookingTime: DateTime.now().add(const Duration(days: 2)),
-      ),
-    );
-    _tickets.insert(
-      0,
-      Ticket(
-        movieTitle: 'KGF 2',
-        imagePath: 'assets/images/samples/sample_movie1.png',
         ticketType: TICKET_TYPE.PLATINUM,
         pricePerTicket: 600,
         quantity: 2,
@@ -44,8 +31,8 @@ class Tickets with ChangeNotifier {
     _tickets.insert(
       0,
       Ticket(
-        movieTitle: 'Doctor Strange: MOM',
-        imagePath: 'assets/images/samples/sample_movie2.png',
+        movieTitle: 'Top Gun: Maverick',
+        imagePath: 'assets/images/samples/sample_movie4.png',
         ticketType: TICKET_TYPE.PLATINUM,
         pricePerTicket: 200,
         quantity: 1,
@@ -64,20 +51,20 @@ class Tickets with ChangeNotifier {
         quantity: 3,
         location: 'Boulevard Mall, Hyderabad',
         movieTime: '04:00 PM',
-        bookingTime: DateTime.now().add(const Duration(days: 26)),
+        bookingTime: DateTime.now().add(const Duration(days: 6)),
       ),
     );
     _tickets.insert(
       0,
       Ticket(
-        movieTitle: 'Doctor Strange: MOM',
-        imagePath: 'assets/images/samples/sample_movie2.png',
+        movieTitle: 'The Gray Man',
+        imagePath: 'assets/images/samples/sample_movie5.png',
         ticketType: TICKET_TYPE.GOLD,
         pricePerTicket: 600,
         quantity: 3,
         location: 'Boulevard Mall, Hyderabad',
         movieTime: '12:00 PM',
-        bookingTime: DateTime.now().add(const Duration(days: 18)),
+        bookingTime: DateTime.now().add(const Duration(days: 3)),
       ),
     );
     return [..._tickets];
