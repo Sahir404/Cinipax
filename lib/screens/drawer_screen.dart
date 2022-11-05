@@ -2,11 +2,13 @@ import 'dart:ui';
 import 'package:cinepax_flutter/constants/constants.dart';
 import 'package:cinepax_flutter/constants/drawer_items.dart';
 import 'package:cinepax_flutter/screens/intermediary_transition_screen.dart';
+import 'package:cinepax_flutter/screens/user_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../providers/UserDetailProvider.dart';
 import '../providers/drawer_state_provider.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -93,6 +95,7 @@ class DrawerScreen extends StatelessWidget {
 class DrawerScreenDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final userDetailProvider = Provider.of<UserDetailProvider>(context);
     return SafeArea(
       left: false,
       right: false,
@@ -126,7 +129,7 @@ class DrawerScreenDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hammad Memon',
+                          '${userDetailProvider.getUserEmail()}',
                           style: kHeadlineSmall.copyWith(
                             color: kPrimaryColor,
                             letterSpacing: 2,
@@ -209,9 +212,10 @@ class DrawerScreenDetails extends StatelessWidget {
                   color: kPrimaryColor,
                   margin: const EdgeInsets.only(left: 6, right: 18),
                 ),
-                const SizedBox(
+                 SizedBox(
                   width: 108,
                   child: ListTile(
+
                     leading: Icon(Icons.logout_outlined, color: kPrimaryColor),
                     title: Text('LOGOUT'),
                     contentPadding: EdgeInsets.only(left: 0),
@@ -219,6 +223,16 @@ class DrawerScreenDetails extends StatelessWidget {
                     style: ListTileStyle.drawer,
                     dense: true,
                     horizontalTitleGap: 0,
+                    onTap: ()
+                    {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                        builder: (context) => UserAuthScreen(),
+                      ),);
+
+                    },
+
                   ),
                 ),
               ],

@@ -1,9 +1,13 @@
+import 'package:cinepax_flutter/providers/UserDetailProvider.dart';
 import 'package:cinepax_flutter/providers/booking_day_state_provider.dart';
 import 'package:cinepax_flutter/providers/congrats_card_state_provider.dart';
 import 'package:cinepax_flutter/providers/drawer_state_provider.dart';
 import 'package:cinepax_flutter/providers/seats_state_provider.dart';
 import 'package:cinepax_flutter/providers/tickets.dart';
 import 'package:cinepax_flutter/screens/splash_screen.dart';
+
+// import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +15,12 @@ import 'package:sizer/sizer.dart';
 
 import './providers/movies.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    // options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   // runApp(
   //   DevicePreview(
   //     enabled: true,
@@ -50,6 +59,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => CongratsCardStateProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserDetailProvider(),
         ),
       ],
       child: Sizer(

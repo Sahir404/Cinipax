@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 enum WeekDay { Mon, Tue, Wed, Thurs, Fri, Sat, Sun }
 
+
 class BookingDayStateProvider with ChangeNotifier {
   final List<WeekDay> _weekDays = [
     WeekDay.Mon,
@@ -12,6 +13,7 @@ class BookingDayStateProvider with ChangeNotifier {
     WeekDay.Sat,
     WeekDay.Sun,
   ];
+
   int _selectedDayIndex = 0;
 
   List<WeekDay> get getWeekDays {
@@ -29,5 +31,9 @@ class BookingDayStateProvider with ChangeNotifier {
 
   WeekDay get getSelectedWeekDay {
     return _weekDays[_selectedDayIndex];
+  }
+  String WeakDay(int i)
+  {
+    return "${_weekDays[i].name.toString()} 12";
   }
 }

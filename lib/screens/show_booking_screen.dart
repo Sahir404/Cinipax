@@ -5,26 +5,29 @@ import 'package:cinepax_flutter/providers/tickets.dart';
 import 'package:cinepax_flutter/screens/payment_screen.dart';
 import 'package:cinepax_flutter/widgets/day_widget.dart';
 import 'package:cinepax_flutter/widgets/show_dual_buttons.dart';
-import 'package:cinepax_flutter/widgets/show_seating_arrangement.dart';
+import 'package:cinepax_flutter/widgets/show_seating_arrangement1.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../models/ticket.dart';
+import '../providers/booking_day_state_provider.dart';
 import '../providers/movies.dart';
 
 class ShowBookingScreen extends StatelessWidget {
-  late final MovieItem _currentMovie;
+
+
 
   @override
   Widget build(BuildContext context) {
+    final stateProvider = Provider.of<BookingDayStateProvider>(context);
     final seatsStateProvider =
         Provider.of<SeatsStateProvider>(context, listen: false);
     final ticketsProvider = Provider.of<Tickets>(context, listen: false);
     ticketsProvider.clearTickets();
     seatsStateProvider.resetSelectedSeats();
-    _currentMovie = Provider.of<Movies>(context, listen: false).getCenterItem;
+    final MovieItem  _currentMovie = Provider.of<Movies>(context, listen: false).getCenterItem;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -43,6 +46,8 @@ class ShowBookingScreen extends StatelessWidget {
             children: [
               const SizedBox(width: 30),
               for (int i = 0; i < 7; i++) DayWidget(weekDayIndex: i),
+
+
             ],
           ),
         ),
@@ -105,10 +110,11 @@ class ShowBookingScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
+
         Consumer<SeatsStateProvider>(builder: (context, provider, _) {
-          return provider.showGoldSeats
-              ? ShowSeatingArrangement()
-              : ShowSeatingArrangement();
+          provider.daySelected(stateProvider.getSelectedDayIndex);
+          return ShowSeatingArrangement();
+
         }),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -147,14 +153,14 @@ class ShowBookingScreen extends StatelessWidget {
                     imagePath: _currentMovie.imagePath,
                     ticketType: TICKET_TYPE.PLATINUM,
                     pricePerTicket: 800,
-                    quantity: allSeats['plat']!.length,
+                    quantity: allSeats['platinium']!.length,
                     movieTime: seatsStateProvider.getTicketTime,
                     location: 'Boulevard Mall, Hyderabad',
                     bookingTime: DateTime.now(),
                   ),
                 );
                 // }
-                if (allSeats['gold']!.isEmpty && allSeats['plat']!.isEmpty) {
+                if (allSeats['gold']!.isEmpty && allSeats['platinium']!.isEmpty) {
                   // no seat selected
                   Fluttertoast.showToast(
                       msg: "Please select at least one seat",

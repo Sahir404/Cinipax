@@ -1,9 +1,15 @@
+import 'package:cinepax_flutter/Services/AuthenticationService.dart';
 import 'package:cinepax_flutter/screens/drawer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../constants/constants.dart';
+import '../providers/UserDetailProvider.dart';
+import '../providers/booking_day_state_provider.dart';
 
 class UserAuthScreen extends StatefulWidget {
   static const routeName = 'user-auth-screen/';
@@ -27,6 +33,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
   // String _username = '';
   // String _email = '';
   // String _password = '';
+  final AuthenticationService _auth = AuthenticationService();
 
   @override
   void initState() {
@@ -407,15 +414,24 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                         ),
                         elevation: MaterialStateProperty.all(6),
                       ),
+
+                      // Work on this LINe
+
+
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.fade,
-                            child: DrawerScreen(),
-                            curve: Curves.easeOut,
-                          ),
-                        );
+                        if(_createAccount)
+                          {
+                            creatAccount(_userNameController.text,
+                                _passwordController.text);
+                            _userNameController.clear();
+                            _passwordController.clear();
+
+                          }
+                        else {
+                          userAuthentication(_userNameController.text,
+                              _passwordController.text,context);
+                        }
+
                       },
                       child: Text(_createAccount ? 'Register' : 'Login'),
                     ),
@@ -477,6 +493,42 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
       ),
     );
   }
+  Future<void> userAuthentication(String email , String userPassword ,BuildContext context)
+  async {
+    final userDetailProvider = Provider.of<UserDetailProvider>(context, listen: false);
+    dynamic authResult =
+    await _auth.loginUser(email, userPassword);
+    if (authResult == null) {
+      print('Sign in error. could not be able to login');
+    } else {
+      userDetailProvider.setUserEmail(email);
+      Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.fade,
+          child: DrawerScreen(),
+          curve: Curves.easeOut,
+        ),
+      );
+    }
+    // if(userName== "sahir"&& userPassword=="kot") {
+
+    // }
+  }
+  Future<void> creatAccount(String email , String userPassword)
+  async {
+      dynamic auhtResult = await _auth.createNewUser( email, userPassword);
+      if (auhtResult == null) {
+        print('Email is not valid');
+      } else {
+        _userNameController.clear();
+        _passwordController.clear();
+
+
+      }
+  }
+
+
 
   void _updateLabelTextColor() {
     setState(() {});
